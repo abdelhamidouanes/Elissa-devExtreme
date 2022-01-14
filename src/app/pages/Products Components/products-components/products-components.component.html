@@ -1,6 +1,22 @@
 <h2 class="content-block">Products / Components</h2>
 <div class="content-block">
     <div class="dx-card responsive-paddings">
-        <p>test</p>
+        <dx-data-grid
+            id="gridContainer"
+            [dataSource]="products"
+            keyExpr="ID_Product"
+            [showBorders]="true"
+        >
+            <dxi-column dataField="ID_Product" caption="ID"></dxi-column>
+            <dxi-column dataField="Name_Product" caption="Name Product"></dxi-column>
+            <dxi-column dataField="Description" caption="Description"></dxi-column>
+            <dxi-column dataField="Email" caption="Mail Developper"></dxi-column>
+            <dxi-column dataField="IdPQ" caption="Id PQ"></dxi-column>
+            <dxi-column dataField="Status_PQ" caption="Status PQ"></dxi-column>
+            <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
+            <div *dxTemplate="let product of 'detail'">
+                <app-products-components-detail [idProd]='product.key'></app-products-components-detail>
+            </div>
+        </dx-data-grid>    
     </div>
 </div>

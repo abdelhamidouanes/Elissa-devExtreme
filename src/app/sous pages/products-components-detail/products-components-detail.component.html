@@ -1,0 +1,13 @@
+<dx-data-grid
+  [dataSource]="components.get(idProd).products"
+  [showBorders]="true"
+  [columnAutoWidth]="true"
+  *ngIf="components.get(idProd) != null"
+>
+  <dxi-column dataField="ID_Product" caption="ID"></dxi-column>
+  <dxi-column dataField="Name_Product" caption="Name Component"></dxi-column>
+  <dxi-column dataField="Description" caption="Description"></dxi-column>
+  <dxi-column dataField="Email" caption="Mail Developper"></dxi-column>
+  <dxi-column dataField="IdPQ" caption="Id PQ"></dxi-column>
+  <dxi-column dataField="Status_PQ" caption="Status PQ"></dxi-column>
+</dx-data-grid>

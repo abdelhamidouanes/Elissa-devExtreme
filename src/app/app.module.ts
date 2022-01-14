@@ -32,6 +32,8 @@ import { HistoryLogsComponent } from './pages/History/history-logs/history-logs.
 import { SettingsUsersComponent } from './pages/Settings/settings-users/settings-users.component';
 import { SettingsAtboxComponent } from './pages/Settings/settings-atbox/settings-atbox.component';
 import { DxDataGridModule } from 'devextreme-angular';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductsComponentsDetailComponent } from './sous pages/products-components-detail/products-components-detail.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,8 @@ import { DxDataGridModule } from 'devextreme-angular';
     HistoryProjeqtorComponent,
     HistoryLogsComponent,
     SettingsUsersComponent,
-    SettingsAtboxComponent
+    SettingsAtboxComponent,
+    ProductsComponentsDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +76,7 @@ import { DxDataGridModule } from 'devextreme-angular';
     LoginFormModule,
     UnauthenticatedContentModule,
     AppRoutingModule,
+    HttpClientModule,
     DxDataGridModule
   ],
   providers: [AuthService, ScreenService, AppInfoService],
