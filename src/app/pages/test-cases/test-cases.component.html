@@ -1,6 +1,37 @@
 <h2 class="content-block">Test Cases</h2>
 <div class="content-block">
     <div class="dx-card responsive-paddings">
-        <p>test</p>
-    </div>
+        <dx-data-grid 
+        id="gridContainer"
+        [dataSource]="testCases" 
+        keyExpr="ID_Test"
+        [showBorders]="true"
+        [columnAutoWidth]="true"
+        [columnHidingEnabled]="true"
+        >
+
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+        <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+        <dxi-column dataField="ID_Test" caption="Id"></dxi-column>
+        <dxi-column dataField="Test_Name" caption="Name"></dxi-column>
+        <dxi-column dataField="Description" caption="Description"></dxi-column>
+        <dxi-column dataField="ID_Version" caption="Version"></dxi-column>
+        <dxi-column dataField="Status_PQ" caption="Status PQ"></dxi-column>
+        <dxi-column dataField="Test_type" caption="Test Type"></dxi-column>
+        <dxi-column dataField="IdPQ" caption="ID PQ"></dxi-column>
+        <dxi-column  caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
+            <div *dxTemplate="let cell of 'cellTemplate'" class="action">
+                <em class="fas fa-eye"></em>
+            </div>                
+        </dxi-column>
+        
+        </dx-data-grid>
+ </div>
 </div>

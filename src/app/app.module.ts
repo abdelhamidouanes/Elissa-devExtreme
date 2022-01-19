@@ -78,7 +78,8 @@ import { ProductsComponentsDetailComponent } from './sous pages/products-compone
     AppRoutingModule,
     HttpClientModule,
     DxDataGridModule,
-    DxPopupModule
+    DxPopupModule,
+    DxDataGridModule
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent]
