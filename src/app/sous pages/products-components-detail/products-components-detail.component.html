@@ -3,11 +3,27 @@
   [showBorders]="true"
   [columnAutoWidth]="true"
   *ngIf="components.get(idProd) != null"
+  [columnHidingEnabled]="true"
 >
+
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+
   <dxi-column dataField="ID_Product" caption="ID"></dxi-column>
   <dxi-column dataField="Name_Product" caption="Name Component"></dxi-column>
   <dxi-column dataField="Description" caption="Description"></dxi-column>
   <dxi-column dataField="Email" caption="Mail Developper"></dxi-column>
   <dxi-column dataField="IdPQ" caption="Id PQ"></dxi-column>
   <dxi-column dataField="Status_PQ" caption="Status PQ"></dxi-column>
+  <dxi-column  caption="Action" cellTemplate="cellTemplate">
+    <div *dxTemplate="let cell of 'cellTemplate'" class="action">
+        <em class="fas fa-eye"></em>
+    </div>                
+  </dxi-column>
+
 </dx-data-grid>
+

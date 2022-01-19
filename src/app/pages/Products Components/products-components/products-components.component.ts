@@ -12,9 +12,20 @@ export class ProductsComponentsComponent implements OnInit, OnDestroy {
   products: any[];
   productsSubscription: Subscription;
 
+  popupVisible = false;
+
+  closeButtonOptions: any;
+
   constructor(private productsComponentsService: ProductsComponentsService) { 
     this.products = [];
     this.productsSubscription = new Subscription();
+
+    this.closeButtonOptions = {
+      text: 'Close',
+      onClick(e: any) {
+        this.popupVisible = false;
+      },
+    };
   }
 
 

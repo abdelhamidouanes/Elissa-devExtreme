@@ -31,7 +31,7 @@ import { HistoryProjeqtorComponent } from './pages/History/history-projeqtor/his
 import { HistoryLogsComponent } from './pages/History/history-logs/history-logs.component';
 import { SettingsUsersComponent } from './pages/Settings/settings-users/settings-users.component';
 import { SettingsAtboxComponent } from './pages/Settings/settings-atbox/settings-atbox.component';
-import { DxDataGridModule } from 'devextreme-angular';
+import { DxDataGridModule, DxPopupModule } from 'devextreme-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponentsDetailComponent } from './sous pages/products-components-detail/products-components-detail.component';
 
@@ -77,7 +77,8 @@ import { ProductsComponentsDetailComponent } from './sous pages/products-compone
     UnauthenticatedContentModule,
     AppRoutingModule,
     HttpClientModule,
-    DxDataGridModule
+    DxDataGridModule,
+    DxPopupModule
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent]
