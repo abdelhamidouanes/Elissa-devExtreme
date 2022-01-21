@@ -29,10 +29,11 @@
       <dxi-column dataField="creation_date" caption="Created Date"></dxi-column>
       <dxi-column  caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
         <div *dxTemplate="let cell of 'cellTemplate'" class="action">
-            <em class="fas fa-eye"></em>
+            <em class="fas fa-eye" (click)="onSeeDetailClick(cell)"></em>
         </div>                
     </dxi-column>
 
       </dx-data-grid>
     </div>
 </div>
+<app-detail-pop-up [event]="seeDetailSubject" title="Ticket Details"></app-detail-pop-up>

@@ -49,6 +49,11 @@ export class DetailPopUpService {
         this.emitDetails();
         break; 
       }
+      case 'test-case-runs-analysis': {
+        this.details = await this.httpClient.get<any>(this.apiUrl+'issues/read_single.php?ID='+id).toPromise();
+        this.emitDetails();
+        break; 
+      }
    } 
   }
 

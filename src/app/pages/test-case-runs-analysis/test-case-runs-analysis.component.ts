@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 
 @Component({
@@ -11,6 +11,8 @@ export class TestCaseRunsAnalysisComponent implements OnInit,OnDestroy {
 
   customers: any[];
   customersSubscription: Subscription;
+
+  seeDetailSubject: Subject<any> = new Subject<any>();
 
   constructor(private customerService: CustomerService) {
     this.customers = [];
@@ -24,10 +26,14 @@ export class TestCaseRunsAnalysisComponent implements OnInit,OnDestroy {
   async ngOnInit(): Promise<void> {
     await this.customerService.getAllCustomers();
     this.customersSubscription = this.customerService.customersSubject.subscribe(data => {
-      console.log(data)
       this.customers = data.issues;
     });
     this.customerService.emitCustomers();
+  }
+
+  
+  onSeeDetailClick(cell: any): void {
+    this.seeDetailSubject.next({'page': 'test-case-runs-analysis', 'id': cell.data.ID_Issue});
   }
 
 }
