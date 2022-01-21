@@ -12,6 +12,8 @@ export class DetailPopUpComponent implements OnInit, OnDestroy {
   @Input() event!: Observable<any>;
   eventSubscription : Subscription;
 
+  @Input() title: any;
+
   popupVisible = false;
 
   windowWidth : number; 

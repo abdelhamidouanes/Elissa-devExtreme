@@ -29,9 +29,10 @@ export class DetailPopUpService {
         this.emitDetails();
         break; 
       } 
-      case '': { 
-         //statements; 
-         break; 
+      case 'products-components-detail': { 
+        this.details = await this.httpClient.get<any>(this.apiUrl+'product/read_single.php?ID='+id).toPromise();
+        this.emitDetails();
+        break; 
       }
    } 
   }

@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { ProductsComponentsService } from 'src/app/shared/services/products-components.service';
 
 @Component({
@@ -13,6 +13,8 @@ export class ProductsComponentsDetailComponent implements OnInit, OnChanges, OnD
 
   components : Map<string,any>;
   compoenntsSubscription: Subscription;
+  
+  seeDetailSubject: Subject<any> = new Subject<any>();
 
   constructor(private productsComponentsService: ProductsComponentsService) { 
     this.components = new Map<string,any>();
@@ -34,5 +36,10 @@ export class ProductsComponentsDetailComponent implements OnInit, OnChanges, OnD
   ngOnDestroy(): void {
     this.compoenntsSubscription.unsubscribe();
   }
+
+  onSeeDetailClick(cell: any): void {
+    this.seeDetailSubject.next({'page': 'products-components-detail', 'id': cell.data.ID_Product});
+  }
+
 
 }
