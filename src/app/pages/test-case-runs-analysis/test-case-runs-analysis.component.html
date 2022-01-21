@@ -1,6 +1,38 @@
 <h2 class="content-block">Test Case Runs Analysis</h2>
 <div class="content-block">
     <div class="dx-card responsive-paddings">
-        <p>test</p>
+        <dx-data-grid
+        id="gridContainer"
+        [dataSource]="customers"
+        keyExpr="ID_Issue"
+        [showBorders]="true"
+        [columnAutoWidth]="true"
+        [columnHidingEnabled]="true"
+      >
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+
+      <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+      <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+      <dxo-header-filter [visible]="true"></dxo-header-filter>
+      <dxi-column dataField="ID_Issue" caption="ID"></dxi-column>
+      <dxi-column dataField="Name" caption="Name"></dxi-column>
+      <dxi-column dataField="Type" caption="Type"></dxi-column>
+      <dxi-column dataField="Description" caption="Description"></dxi-column>
+      <dxi-column dataField="Name_Product" caption="Product"></dxi-column>
+      <dxi-column dataField="Version" caption="Version"></dxi-column>
+      <dxi-column dataField="IdPQ" caption="Id PQ"></dxi-column>
+      <dxi-column dataField="Status" caption="Status"></dxi-column>
+      <dxi-column dataField="Created_by" caption="Created By"></dxi-column>
+      <dxi-column dataField="creation_date" caption="Created Date"></dxi-column>
+      <dxi-column  caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
+        <div *dxTemplate="let cell of 'cellTemplate'" class="action">
+            <em class="fas fa-eye"></em>
+        </div>                
+    </dxi-column>
+
+      </dx-data-grid>
     </div>
 </div>
