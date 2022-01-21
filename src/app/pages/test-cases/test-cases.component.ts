@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { TestCaseServiceService } from 'src/app/shared/services/test-case-service.service';
 
 @Component({
@@ -12,6 +12,8 @@ export class TestCasesComponent implements OnInit {
   testCases:any[];
   testCasesSubscription: Subscription;
 
+  seeDetailSubject: Subject<any> = new Subject<any>();
+  
   constructor(private testCaseService: TestCaseServiceService) {
 
     this.testCases = [];
@@ -30,6 +32,10 @@ export class TestCasesComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.testCasesSubscription.unsubscribe();
+  }
+
+  onSeeDetailClick(cell: any): void {
+    this.seeDetailSubject.next({'page': 'test-cases', 'id': cell.data.ID_Test});
   }
 
 }

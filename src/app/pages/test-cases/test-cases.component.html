@@ -32,10 +32,11 @@
         <dxi-column dataField="IdPQ" caption="ID PQ"></dxi-column>
         <dxi-column  caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
             <div *dxTemplate="let cell of 'cellTemplate'" class="action">
-                <em class="fas fa-eye"></em>
+                <em class="fas fa-eye" (click)="onSeeDetailClick(cell)"></em>
             </div>                
         </dxi-column>
         
         </dx-data-grid>
  </div>
 </div>
+<app-detail-pop-up [event]="seeDetailSubject" title="Test Case Details"></app-detail-pop-up>
