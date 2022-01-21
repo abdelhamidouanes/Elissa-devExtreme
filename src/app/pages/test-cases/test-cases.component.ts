@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { TestCaseServiceService } from 'src/app/shared/services/test-case-service.service';
 
 @Component({
   selector: 'app-test-cases',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestCasesComponent implements OnInit {
 
-  constructor() { }
+  testCases:any[];
+  testCasesSubscription: Subscription;
 
-  ngOnInit(): void {
+  constructor(private testCaseService: TestCaseServiceService) {
+
+    this.testCases = [];
+    this.testCasesSubscription = new Subscription();
+  }
+
+  async ngOnInit(): Promise<void> {
+    await this.testCaseService.getTestCases();
+    this.testCasesSubscription = this.testCaseService.testCasesSubject.subscribe(data => {
+      
+      this.testCases = data.part;
+    });
+
+    this.testCaseService.emitTestCases();
+  }
+
+  ngOnDestroy(): void {
+    this.testCasesSubscription.unsubscribe();
   }
 
 }
