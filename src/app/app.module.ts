@@ -35,6 +35,7 @@ import { DxButtonModule, DxDataGridModule, DxPopupModule } from 'devextreme-angu
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponentsDetailComponent } from './sous pages/products-components-detail/products-components-detail.component';
 import { DetailPopUpComponent } from './shared/components/detail-pop-up/detail-pop-up.component';
+import { ProductsComponentsVersionsDetailComponent } from './sous pages/products-components-versions-detail/products-components-versions-detail.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { DetailPopUpComponent } from './shared/components/detail-pop-up/detail-p
     SettingsUsersComponent,
     SettingsAtboxComponent,
     ProductsComponentsDetailComponent,
-    DetailPopUpComponent
+    DetailPopUpComponent,
+    ProductsComponentsVersionsDetailComponent
   ],
   imports: [
     BrowserModule,

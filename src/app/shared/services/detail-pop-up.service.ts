@@ -34,6 +34,16 @@ export class DetailPopUpService {
         this.emitDetails();
         break; 
       }
+      case 'products-components-versions': {
+        this.details = await this.httpClient.get<any>(this.apiUrl+'version/read_single.php?ID='+id).toPromise();
+        this.emitDetails();
+        break; 
+      }
+      case 'products-components-versions-detail': {
+        this.details = await this.httpClient.get<any>(this.apiUrl+'version/read_single.php?ID='+id).toPromise();
+        this.emitDetails();
+        break; 
+      }
    } 
   }
 
