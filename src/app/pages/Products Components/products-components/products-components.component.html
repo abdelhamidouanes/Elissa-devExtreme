@@ -25,10 +25,10 @@
             <dxi-column dataField="Email" caption="Mail Developper"></dxi-column>
             <dxi-column dataField="IdPQ" caption="Id PQ"></dxi-column>
             <dxi-column dataField="Status_PQ" caption="Status PQ"></dxi-column>
-            <dxi-column  caption="Action" cellTemplate="cellTemplate">
+            <dxi-column caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
                 <div *dxTemplate="let cell of 'cellTemplate'" class="action">
-                    <em class="fas fa-eye"></em>
-                </div>                
+                    <em class="fas fa-eye" (click)="onSeeDetailClick(cell)"></em>
+                </div>
             </dxi-column>
             
             <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
@@ -39,23 +39,4 @@
         </dx-data-grid>    
     </div>
 </div>
-<dx-popup
-    [width]="300"
-    [height]="280"
-    [showTitle]="true"
-    title="Product Details"
-    [dragEnabled]="false"
-    [closeOnOutsideClick]="true"
-    [showCloseButton]="false"
-    container=".dx-viewport"
-    [(visible)]="popupVisible"
->
-    <dxi-toolbar-item
-      widget="dxButton"
-      toolbar="bottom"
-      location="after"
-      [options]="closeButtonOptions"
-    >
-    </dxi-toolbar-item>
-
-</dx-popup>
+<app-detail-pop-up [event]="seeDetailSubject"></app-detail-pop-up>

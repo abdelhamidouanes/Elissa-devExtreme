@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { ProductsComponentsService } from 'src/app/shared/services/products-components.service';
 
 @Component({
@@ -12,20 +12,14 @@ export class ProductsComponentsComponent implements OnInit, OnDestroy {
   products: any[];
   productsSubscription: Subscription;
 
-  popupVisible = false;
-
   closeButtonOptions: any;
+
+  seeDetailSubject: Subject<any> = new Subject<any>();
+
 
   constructor(private productsComponentsService: ProductsComponentsService) { 
     this.products = [];
     this.productsSubscription = new Subscription();
-
-    this.closeButtonOptions = {
-      text: 'Close',
-      onClick(e: any) {
-        this.popupVisible = false;
-      },
-    };
   }
 
 
@@ -39,6 +33,10 @@ export class ProductsComponentsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.productsSubscription.unsubscribe();
+  }
+
+  onSeeDetailClick(cell: any): void {
+    this.seeDetailSubject.next({'page': 'products-components', 'id': cell.data.ID_Product});
   }
 
 }

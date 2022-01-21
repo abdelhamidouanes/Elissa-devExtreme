@@ -19,7 +19,7 @@
   <dxi-column dataField="Email" caption="Mail Developper"></dxi-column>
   <dxi-column dataField="IdPQ" caption="Id PQ"></dxi-column>
   <dxi-column dataField="Status_PQ" caption="Status PQ"></dxi-column>
-  <dxi-column  caption="Action" cellTemplate="cellTemplate">
+  <dxi-column  caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
     <div *dxTemplate="let cell of 'cellTemplate'" class="action">
         <em class="fas fa-eye"></em>
     </div>                

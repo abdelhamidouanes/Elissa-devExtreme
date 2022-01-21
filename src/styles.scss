@@ -2,3 +2,18 @@
 *{
     --theme-color: #009688;
 }
+.action{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--theme-color);
+    cursor: pointer;
+}
+
+.dx-field-value-static{
+    padding: 8px;
+}
+
+.dx-field{
+    margin-bottom: 10px;
+}
