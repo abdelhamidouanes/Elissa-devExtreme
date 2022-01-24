@@ -1,0 +1,17 @@
+<div class="dx-card responsive-paddings">
+    <dx-data-grid
+    id="gridContainer"
+    [dataSource]="runsData"      
+    [showBorders]="true"
+    keyExpr="ID_Run"
+            >
+    <dxi-column dataField="ID_Run" caption="ID"></dxi-column>
+    <dxi-column dataField="Run_Identifier" caption="Run Identifier"></dxi-column>
+    <dxi-column dataField="Result_Execution" caption="Execution Result"></dxi-column>
+    <dxi-column dataField="Duration" caption="Duration (Seconds)"></dxi-column>
+    <dxi-column dataField="IdPQ" caption="IdPQ"></dxi-column>
+    <dxi-column dataField="Analysis" caption="Analysis Status"></dxi-column>
+    <dxi-column dataField="Created_by" caption="Launched By"></dxi-column>
+    </dx-data-grid> 
+</div>    
+
