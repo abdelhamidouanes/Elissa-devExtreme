@@ -1,6 +1,6 @@
 <dx-popup
     [width]="getWidthPopUp()"
-    height="auto"
+    [height]="getHeightPopUp()"
     [showTitle]="true"
     [title]="title"
     [dragEnabled]="false"
@@ -10,22 +10,24 @@
     [(visible)]="popupVisible"
     class="container"
 >
-  <div class="container">
-    <div class="containt">
-        <div class="dx-field one-item" *ngFor="let item of details| keyvalue">
-          <div class="dx-field-label">{{strRemplace(item.key)}}</div>
-          <div class="dx-field-value-static">{{item.value}}</div>
+    <dx-scroll-view width="100%" height="100%">
+      <div class="container">
+        <div class="containt">
+            <div class="dx-field one-item" *ngFor="let item of details| keyvalue">
+              <div class="dx-field-label">{{strRemplace(item.key)}}</div>
+              <div class="dx-field-value-static">{{item.value}}</div>
+            </div>
         </div>
-    </div>
-    <div class="buttons">
-      <dx-button
-        stylingMode="contained"
-        text="Close"
-        type="normal"
-        [width]="80"
-        (click)="closePopUp()"
-      >
-      </dx-button>
-    </div>
-  </div>
+        <div class="buttons">
+          <dx-button
+            stylingMode="contained"
+            text="Close"
+            type="normal"
+            [width]="80"
+            (click)="closePopUp()"
+          >
+          </dx-button>
+        </div>
+      </div>
+    </dx-scroll-view>  
 </dx-popup>

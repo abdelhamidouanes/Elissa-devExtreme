@@ -35,7 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponentsDetailComponent } from './sous pages/products-components-detail/products-components-detail.component';
 import { DetailPopUpComponent } from './shared/components/detail-pop-up/detail-pop-up.component';
 import { ProductsComponentsVersionsDetailComponent } from './sous pages/products-components-versions-detail/products-components-versions-detail.component';
-import { DxAccordionModule, DxButtonModule, DxDataGridModule, DxPopupModule, DxTemplateModule } from 'devextreme-angular';
+import { DxAccordionModule, DxButtonModule, DxDataGridModule, DxPopupModule, DxScrollViewModule, DxTemplateModule } from 'devextreme-angular';
 import { TestCaseRunDetailsComponent } from './sous pages/test-case-run-details/test-case-run-details.component';
 import { TestCaseRunSousDetailsComponent } from './sous pages/test-case-run-sous-details/test-case-run-sous-details.component';
 
@@ -90,7 +90,8 @@ import { TestCaseRunSousDetailsComponent } from './sous pages/test-case-run-sous
     DxPopupModule,
     DxButtonModule,
     DxTemplateModule,
-    DxAccordionModule
+    DxAccordionModule,
+    DxScrollViewModule
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent]

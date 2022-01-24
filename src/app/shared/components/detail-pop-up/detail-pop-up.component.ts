@@ -17,12 +17,14 @@ export class DetailPopUpComponent implements OnInit, OnDestroy {
   popupVisible = false;
 
   windowWidth : number; 
+  windowHeight : number;
 
   details: any;
   detailsSubscription: Subscription;
 
   constructor(private detailPopUpService: DetailPopUpService) { 
     this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
     this.eventSubscription = new Subscription();
     this.detailsSubscription = new Subscription();
   }
@@ -57,9 +59,14 @@ export class DetailPopUpComponent implements OnInit, OnDestroy {
     return this.windowWidth * 0.8;
   }
 
+  getHeightPopUp(): any{
+    return this.windowHeight * 0.8;
+  }
+
   @HostListener('window:resize', ['$event'])
   onResizeWindow(event: any) {
      this.windowWidth = window.innerWidth;
+     this.windowHeight = window.innerHeight;
   }
 
 }

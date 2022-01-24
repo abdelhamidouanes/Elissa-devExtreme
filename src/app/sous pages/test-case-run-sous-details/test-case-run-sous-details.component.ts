@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-test-case-run-sous-details',
@@ -7,10 +8,16 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TestCaseRunSousDetailsComponent implements OnInit {
   @Input() runsData: any;
+  
+  seeDetailSubject: Subject<any> = new Subject<any>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSeeDetailClick(cell: any): void{
+    this.seeDetailSubject.next({'page': 'test-case-run-sous-details', 'id': cell.data.ID_Run});
   }
 
 }

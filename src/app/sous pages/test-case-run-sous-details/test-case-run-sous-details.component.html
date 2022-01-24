@@ -3,15 +3,30 @@
     id="gridContainer"
     [dataSource]="runsData"      
     [showBorders]="true"
-    keyExpr="ID_Run"
-            >
-    <dxi-column dataField="ID_Run" caption="ID"></dxi-column>
-    <dxi-column dataField="Run_Identifier" caption="Run Identifier"></dxi-column>
-    <dxi-column dataField="Result_Execution" caption="Execution Result"></dxi-column>
-    <dxi-column dataField="Duration" caption="Duration (Seconds)"></dxi-column>
-    <dxi-column dataField="IdPQ" caption="IdPQ"></dxi-column>
-    <dxi-column dataField="Analysis" caption="Analysis Status"></dxi-column>
-    <dxi-column dataField="Created_by" caption="Launched By"></dxi-column>
+    [columnAutoWidth]="true"
+    [columnHidingEnabled]="true"
+    keyExpr="ID_Run">      
+
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+            
+        <dxi-column dataField="ID_Run" caption="ID"></dxi-column>
+        <dxi-column dataField="Run_Identifier" caption="Run Identifier"></dxi-column>
+        <dxi-column dataField="Result_Execution" caption="Execution Result"></dxi-column>
+        <dxi-column dataField="Duration" caption="Duration (Seconds)"></dxi-column>
+        <dxi-column dataField="IdPQ" caption="IdPQ"></dxi-column>
+        <dxi-column dataField="Analysis" caption="Analysis Status"></dxi-column>
+        <dxi-column dataField="Created_by" caption="Launched By"></dxi-column>
+        <dxi-column caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
+            <div *dxTemplate="let cell of 'cellTemplate'" class="action">
+                <em class="fas fa-eye" (click)="onSeeDetailClick(cell)"></em>
+            </div>
+        </dxi-column>
+
     </dx-data-grid> 
 </div>    
-
+<app-detail-pop-up [event]="seeDetailSubject" title="Test Case Run Details"></app-detail-pop-up>

@@ -5,7 +5,19 @@
         id="gridContainer"
         [dataSource]="testCaseRun"        
         [showBorders]="true"
+        [columnAutoWidth]="true"
+        [columnHidingEnabled]="true"
         keyExpr="ID_Session" >
+
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+        <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
         <dxi-column dataField="ID_Session" caption="ID Session"></dxi-column>
         <dxi-column dataField="Name_Session" caption="Name Session"></dxi-column>
         <dxi-column dataField="Name_Product" caption="Product"></dxi-column>
