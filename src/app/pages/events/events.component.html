@@ -17,12 +17,13 @@
         <dxo-search-panel [visible]="true"></dxo-search-panel>
 
         <dxo-header-filter [visible]="true"></dxo-header-filter>
+
         <dxi-column dataField="ID" caption="ID"></dxi-column>
         <dxi-column dataField="Executed_Date" caption="Planned Run Date"></dxi-column>
         <dxi-column dataField="ID_Session" caption="ID Session" cellTemplate="cellbtn">
             <div *dxTemplate="let cell of 'cellbtn'">
               
-              <button class="button-3"  role="button">#{{cell.text}}</button>
+              <button class="status"  role="button">#{{cell.text}}</button>
              
           </div>
 
@@ -35,12 +36,14 @@
         </dxi-column>
         <dxi-column dataField="Version" caption="Version"></dxi-column>
         <dxi-column dataField="Comments" caption="Description"></dxi-column>
-        <dxi-column dataField="Status" caption="Status"cellTemplate="cellStatus">
+        <dxi-column dataField="Status" caption="Status" cellTemplate="cellStatus">
             <div *dxTemplate="let cell of 'cellStatus'">
-              
-              <button class="button-3"  role="button">{{cell.text}}</button>
+              <button [ngClass]="{'status': true,
+                                  'status-open': cell.data.Status == 'Open',
+                                  'status-closed': cell.data.Status == 'Closed',
+                                  'status-inProgress': cell.data.Status == 'In Progress',
+                                  'status-draft': cell.data.Status == 'Draft'}"  role="button">{{cell.text}}</button>
           </div>
-
         </dxi-column>
         <dxi-column dataField="Planning" caption="Planning"></dxi-column>
         <dxi-column dataField="Created_by" caption="Created By"></dxi-column>
@@ -49,8 +52,8 @@
             <div *dxTemplate="let cell of 'cellTemplate'" class="action">
                 <em class="fas fa-eye actionView" (click)="onSeeDetailClick(cell)"></em>
                 <em *ngIf="cell.data.Status == 'Open'" class="fas fa-edit actionEdit"></em>
-                <em *ngIf="" class="fas fa-play actionPlay"></em>
-                <em *ngIf="" class="fas fa-trash actionDelete"></em>
+                <em *ngIf="cell.data.Status == 'Open' && cell.data.Planning == 'Fixed'" class="fas fa-play actionPlay"></em>
+                <em *ngIf="cell.data.Status == 'Open'" class="fas fa-trash actionDelete"></em>
             </div>              
         </dxi-column>
         </dx-data-grid>
