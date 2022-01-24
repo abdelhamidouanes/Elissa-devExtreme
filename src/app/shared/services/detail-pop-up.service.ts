@@ -59,6 +59,16 @@ export class DetailPopUpService {
         this.emitDetails();
         break; 
       }
+      case 'events': {
+        this.details = await this.httpClient.get<any>(this.apiUrl+'events/read_single.php?ID='+id).toPromise();
+        this.emitDetails();
+        break; 
+      }
+      case 'events-product-detail': {
+        this.details = await this.httpClient.get<any>(this.apiUrl+'product/read_single.php?ID='+id).toPromise();
+        this.emitDetails();
+        break; 
+      }
    } 
   }
 

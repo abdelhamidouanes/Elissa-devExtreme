@@ -13,6 +13,8 @@ export class EventsComponent implements OnInit {
 
   seeDetailSubject: Subject<any> = new Subject<any>();
 
+  popUpTitle = '';
+
 
   constructor(private eventService: EventService) {
     this.events = [];
@@ -31,7 +33,14 @@ export class EventsComponent implements OnInit {
 
 
   onSeeDetailClick(cell: any): void {
-   
+    this.popUpTitle = 'Event Details';
+    this.seeDetailSubject.next({'page': 'events', 'id': cell.data.ID});
+  }
+
+  
+  onSeeDetailProductClick(cell: any): void {
+    this.popUpTitle = 'Product Details';
+    this.seeDetailSubject.next({'page': 'events-product-detail', 'id': cell.data.ID_Product});
   }
 
   

@@ -30,7 +30,7 @@
         </dxi-column>
         <dxi-column dataField="Name_Product" caption="Product" cellTemplate="cellProduct">
             <div *dxTemplate="let cell of 'cellProduct'">
-              <em class="ProductColumn" (click)=onSeeDetailClick(cell)>{{cell.text}}</em>
+              <em class="ProductColumn" (click)=onSeeDetailProductClick(cell)>{{cell.text}}</em>
           </div>
          
         </dxi-column>
@@ -59,4 +59,4 @@
         </dx-data-grid>
     </div>
 </div>
-
+<app-detail-pop-up [event]="seeDetailSubject" [title]="popUpTitle"></app-detail-pop-up>
