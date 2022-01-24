@@ -10,7 +10,7 @@ import { ProductsComponentsService } from 'src/app/shared/services/products-comp
 export class ProductsComponentsComponent implements OnInit, OnDestroy {
 
   products: any[];
-  productsSubscription: Subscription;
+  productsSubscription: Subscription; 
 
   popupVisible = false;
 

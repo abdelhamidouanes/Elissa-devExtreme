@@ -27,6 +27,7 @@ import { HistoryProjeqtorComponent } from './pages/History/history-projeqtor/his
 import { HistoryLogsComponent } from './pages/History/history-logs/history-logs.component';
 import { SettingsUsersComponent } from './pages/Settings/settings-users/settings-users.component';
 import { SettingsAtboxComponent } from './pages/Settings/settings-atbox/settings-atbox.component';
+import { TestCaseRunDetailsComponent } from './sous pages/test-case-run-details/test-case-run-details.component';
 
 const routes: Routes = [
   {

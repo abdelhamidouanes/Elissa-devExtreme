@@ -1,6 +1,31 @@
 <h2 class="content-block">Test Case Run</h2>
 <div class="content-block">
     <div class="dx-card responsive-paddings">
-        <p>test</p>
+        <dx-data-grid
+        id="gridContainer"
+        [dataSource]="testCaseRun"        
+        [showBorders]="true"
+        keyExpr="ID_Session" >
+        <dxi-column dataField="ID_Session" caption="ID Session"></dxi-column>
+        <dxi-column dataField="Name_Session" caption="Name Session"></dxi-column>
+        <dxi-column dataField="Name_Product" caption="Product"></dxi-column>
+        <dxi-column dataField="Version" caption="Version"></dxi-column>
+        <dxi-column dataField="Build_Number" caption="#"></dxi-column>
+        <dxi-column dataField="Result_Execution" caption="Execution Result"></dxi-column>
+        <dxi-column dataField="Git_Branch" caption="Git Branch"></dxi-column>
+        <dxi-column dataField="IdPQ" caption="Id PQ"></dxi-column>
+        <dxi-column dataField="Created_date" caption="Launch time"></dxi-column>
+        <dxi-column dataField="Created_by" caption="Launch By"></dxi-column>
+        <dxi-column dataField="duration" caption="Duration (Seconds)"></dxi-column>
+        <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
+
+        <div *dxTemplate="let tcr of 'detail'">
+            <app-test-case-run-details *ngIf="tcr.data.pjs != null" [pjsData]="tcr.data.pjs"></app-test-case-run-details>
+        </div>
+        </dx-data-grid>
     </div>
+    
+
+    
 </div>
+

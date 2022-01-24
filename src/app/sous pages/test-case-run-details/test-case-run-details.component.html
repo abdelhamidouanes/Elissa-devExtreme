@@ -1,0 +1,19 @@
+
+<div id="accordion">
+  <dx-accordion
+    #accordion
+    [dataSource]="pjsData"
+    [collapsible]="true"
+    [multiple]="true"
+    [animationDuration]="300"
+    [selectedItems]="[null]"
+  >
+    <div *dxTemplate="let pjs of 'title'">
+      <h1>{{ pjs.Pjs_Name }}</h1>
+    </div>
+    <div *dxTemplate="let pjs of 'item'">
+      <app-test-case-run-sous-details *ngIf="pjs.runs != null" [runsData]="pjs.runs"></app-test-case-run-sous-details>
+    </div>
+
+  </dx-accordion>
+</div>

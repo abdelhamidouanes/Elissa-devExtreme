@@ -31,9 +31,11 @@ import { HistoryProjeqtorComponent } from './pages/History/history-projeqtor/his
 import { HistoryLogsComponent } from './pages/History/history-logs/history-logs.component';
 import { SettingsUsersComponent } from './pages/Settings/settings-users/settings-users.component';
 import { SettingsAtboxComponent } from './pages/Settings/settings-atbox/settings-atbox.component';
-import { DxDataGridModule, DxPopupModule } from 'devextreme-angular';
+import { DxAccordionModule, DxCheckBoxModule, DxDataGridModule, DxPopupModule, DxSliderModule, DxTagBoxModule, DxTemplateModule } from 'devextreme-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponentsDetailComponent } from './sous pages/products-components-detail/products-components-detail.component';
+import { TestCaseRunDetailsComponent } from './sous pages/test-case-run-details/test-case-run-details.component';
+import { TestCaseRunSousDetailsComponent } from './sous pages/test-case-run-sous-details/test-case-run-sous-details.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,10 @@ import { ProductsComponentsDetailComponent } from './sous pages/products-compone
     HistoryLogsComponent,
     SettingsUsersComponent,
     SettingsAtboxComponent,
-    ProductsComponentsDetailComponent
+    ProductsComponentsDetailComponent,
+    TestCaseRunDetailsComponent,
+    TestCaseRunSousDetailsComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -78,7 +83,10 @@ import { ProductsComponentsDetailComponent } from './sous pages/products-compone
     AppRoutingModule,
     HttpClientModule,
     DxDataGridModule,
-    DxPopupModule
+    DxPopupModule,
+    DxDataGridModule,
+    DxTemplateModule,
+    DxAccordionModule
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent]
