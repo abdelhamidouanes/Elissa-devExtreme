@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 *{
     --theme-color: rgba(61, 205, 88, 1);
+    --status-inProgress : #6aaaf3;
+    --status-closed : #936af3;
+    --status-draft : #e5f36a;
 }
+
 .action{
     display: flex;
     justify-content: center;
@@ -24,4 +28,44 @@
 
 .dx-popup-title{
     color: var(--theme-color);
+}
+
+
+.status {
+    background-color: var(--theme-color);
+    appearance: none;
+    border: 1px solid rgba(27, 31, 35, .15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+    color: #fff;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.status-open{
+    background-color: var(--theme-color);
+}
+
+.status-closed{
+    background-color: var(--status-closed);
+}
+
+.status-inProgress{
+    background-color: var(--status-inProgress);
+}
+
+.status-draft{
+    background-color: var(--status-draft);
 }

@@ -1,6 +1,62 @@
 <h2 class="content-block">Sessions Events</h2>
 <div class="content-block">
     <div class="dx-card responsive-paddings">
-        <p>test</p>
+        <dx-data-grid
+            id="gridContainer"
+            [dataSource]="events"
+            keyExpr="ID"
+            [showBorders]="true"
+            [columnAutoWidth]="true"
+            [columnHidingEnabled]="true"
+        >
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+        <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+        <dxi-column dataField="ID" caption="ID"></dxi-column>
+        <dxi-column dataField="Executed_Date" caption="Planned Run Date"></dxi-column>
+        <dxi-column dataField="ID_Session" caption="ID Session" cellTemplate="cellbtn">
+            <div *dxTemplate="let cell of 'cellbtn'">
+              
+              <button class="status"  role="button">#{{cell.text}}</button>
+             
+          </div>
+
+        </dxi-column>
+        <dxi-column dataField="Name_Product" caption="Product" cellTemplate="cellProduct">
+            <div *dxTemplate="let cell of 'cellProduct'">
+              <em class="ProductColumn" (click)=onSeeDetailClick(cell)>{{cell.text}}</em>
+          </div>
+         
+        </dxi-column>
+        <dxi-column dataField="Version" caption="Version"></dxi-column>
+        <dxi-column dataField="Comments" caption="Description"></dxi-column>
+        <dxi-column dataField="Status" caption="Status" cellTemplate="cellStatus">
+            <div *dxTemplate="let cell of 'cellStatus'">
+              <button [ngClass]="{'status': true,
+                                  'status-open': cell.data.Status == 'Open',
+                                  'status-closed': cell.data.Status == 'Closed',
+                                  'status-inProgress': cell.data.Status == 'In Progress',
+                                  'status-draft': cell.data.Status == 'Draft'}"  role="button">{{cell.text}}</button>
+          </div>
+        </dxi-column>
+        <dxi-column dataField="Planning" caption="Planning"></dxi-column>
+        <dxi-column dataField="Created_by" caption="Created By"></dxi-column>
+        <dxi-column dataField="Created_date" caption="Created Date"></dxi-column>
+        <dxi-column  caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
+            <div *dxTemplate="let cell of 'cellTemplate'" class="action">
+                <em class="fas fa-eye actionView" (click)="onSeeDetailClick(cell)"></em>
+                <em *ngIf="cell.data.Status == 'Open'" class="fas fa-edit actionEdit"></em>
+                <em *ngIf="cell.data.Status == 'Open' && cell.data.Planning == 'Fixed'" class="fas fa-play actionPlay"></em>
+                <em *ngIf="cell.data.Status == 'Open'" class="fas fa-trash actionDelete"></em>
+            </div>              
+        </dxi-column>
+        </dx-data-grid>
     </div>
 </div>
+
