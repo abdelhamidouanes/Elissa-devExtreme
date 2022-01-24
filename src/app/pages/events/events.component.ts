@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { EventService } from 'src/app/shared/services/event.service';
 @Component({
   selector: 'app-events',
@@ -10,15 +10,17 @@ export class EventsComponent implements OnInit {
 
   events: any[];
   eventsSubscription: Subscription;
-  isEditButtonVisible:boolean = true;
-  isPlayButtonVisible:boolean = true;
-  isDeleteButtonVisible:boolean = true;
+
+  seeDetailSubject: Subject<any> = new Subject<any>();
+
+
   constructor(private eventService: EventService) {
     this.events = [];
     this.eventsSubscription = new Subscription();
   }
 
   async ngOnInit(): Promise<void> {
+
     await this.eventService.getEvents();  
     this.eventsSubscription = this.eventService.eventsSubject.subscribe(data => {
       this.events = data.events;
@@ -26,8 +28,15 @@ export class EventsComponent implements OnInit {
     this.eventService.emitEvents();
     
   }
+
+
+  onSeeDetailClick(cell: any): void {
+   
+  }
+
   
   ngOnDestroy(): void {
     this.eventsSubscription.unsubscribe();
   }
+ 
 }

@@ -19,23 +19,41 @@
         <dxo-header-filter [visible]="true"></dxo-header-filter>
         <dxi-column dataField="ID" caption="ID"></dxi-column>
         <dxi-column dataField="Executed_Date" caption="Planned Run Date"></dxi-column>
-        <dxi-column dataField="ID_Session" caption="ID Session"></dxi-column>
-        <dxi-column dataField="Name_Product" caption="Product"></dxi-column>
+        <dxi-column dataField="ID_Session" caption="ID Session" cellTemplate="cellbtn">
+            <div *dxTemplate="let cell of 'cellbtn'">
+              
+              <button class="button-3"  role="button">#{{cell.text}}</button>
+             
+          </div>
+
+        </dxi-column>
+        <dxi-column dataField="Name_Product" caption="Product" cellTemplate="cellProduct">
+            <div *dxTemplate="let cell of 'cellProduct'">
+              <em class="ProductColumn" (click)=onSeeDetailClick(cell)>{{cell.text}}</em>
+          </div>
+         
+        </dxi-column>
         <dxi-column dataField="Version" caption="Version"></dxi-column>
         <dxi-column dataField="Comments" caption="Description"></dxi-column>
-        <dxi-column dataField="Status" caption="Status"></dxi-column>
+        <dxi-column dataField="Status" caption="Status"cellTemplate="cellStatus">
+            <div *dxTemplate="let cell of 'cellStatus'">
+              
+              <button class="button-3"  role="button">{{cell.text}}</button>
+          </div>
+
+        </dxi-column>
         <dxi-column dataField="Planning" caption="Planning"></dxi-column>
         <dxi-column dataField="Created_by" caption="Created By"></dxi-column>
         <dxi-column dataField="Created_date" caption="Created Date"></dxi-column>
         <dxi-column  caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
-            <div *dxTemplate="let cell of 'cellTemplate'">
-                <em class="fas fa-eye actionView"></em>
-                <em *ngIf="isEditButtonVisible" class="fas fa-edit actionEdit" ></em>
-                <em *ngIf="isPlayButtonVisible" class="fas fa-play actionPlay"></em>
-                <em *ngIf="isDeleteButtonVisible" class="fas fa-trash actionDelete"></em>
-            </div> 
-                          
+            <div *dxTemplate="let cell of 'cellTemplate'" class="action">
+                <em class="fas fa-eye actionView" (click)="onSeeDetailClick(cell)"></em>
+                <em *ngIf="cell.data.Status == 'Open'" class="fas fa-edit actionEdit"></em>
+                <em *ngIf="" class="fas fa-play actionPlay"></em>
+                <em *ngIf="" class="fas fa-trash actionDelete"></em>
+            </div>              
         </dxi-column>
         </dx-data-grid>
     </div>
 </div>
+
