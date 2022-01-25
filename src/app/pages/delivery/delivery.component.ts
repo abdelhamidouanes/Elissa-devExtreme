@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { DeliveryService } from 'src/app/shared/services/delivery.service';
 
 @Component({
@@ -10,25 +10,26 @@ import { DeliveryService } from 'src/app/shared/services/delivery.service';
 export class DeliveryComponent implements OnInit {
 
   deliverys: any[];
-  
   deliverysSubscription: Subscription;
 
-  popupVisible = false;
-
-  closeButtonOptions: any;
+  seeDetailSubject: Subject<any> = new Subject<any>();
+  
   constructor(private deliveryService: DeliveryService) { 
     this.deliverysSubscription = new Subscription();
     this.deliverys = [];
-
   }
 
   async ngOnInit(): Promise<void> {
     await this.deliveryService.getdeliverys();
     this.deliverysSubscription = this.deliveryService.deliverisSubject.subscribe(data => {
-      console.log(data)
       this.deliverys = data.deliverys;
     });
     this.deliveryService.emitDeliveris();
+  }
+
+  
+  onSeeDetailClick(cell: any): void {
+    this.seeDetailSubject.next({'page': 'delivery', 'id': cell.data.ID_delivery});
   }
 
 }
