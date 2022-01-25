@@ -1,6 +1,63 @@
 <h2 class="content-block">Deliveries</h2>
 <div class="content-block">
     <div class="dx-card responsive-paddings">
-        <p>test</p>
+        <dx-data-grid id="gridContainer" [dataSource]="deliverys"
+        [showBorders]="true"
+        keyExpr="ID_delivery"
+        [showBorders]="true"
+        [columnAutoWidth]="true"
+        [columnHidingEnabled]="true">
+        
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+        <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+        <dxi-column dataField="ID_delivery" caption="ID"></dxi-column>
+        <dxi-column dataField="IdPQ" caption="IdPQ"></dxi-column>
+        <dxi-column dataField="Name_Product" caption="Name Product"></dxi-column>
+        <dxi-column dataField="Nbrjour" caption="Nbr jours"></dxi-column>
+        <dxi-column dataField="Status" caption="Status"></dxi-column>
+        <dxi-column dataField="Version" caption="Version"></dxi-column>
+        <dxi-column dataField="day_name" caption="Day name"></dxi-column>
+        <dxi-column dataField="idProductVersion" caption="Id Product Version"></dxi-column>
+        <dxi-column dataField="Delivery_Date" caption="Delivery Date"></dxi-column>
+        <dxi-column dataField="DeliveryProductState" caption="Delivery Product State"></dxi-column>
+        <dxi-column dataField="Created_date" caption="Created Date"></dxi-column>
+        <dxi-column dataField="Created_by" caption="Created by"></dxi-column>
+        <dxi-column dataField="Comments" caption="Comments"></dxi-column>
+
+        <dxi-column  caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
+            <div *dxTemplate="let cell of 'cellTemplate'" class="action">
+                <em class="fas fa-eye"></em>
+            </div>                
+        </dxi-column>
+        </dx-data-grid>
     </div>
 </div>
+
+
+<dx-popup
+    [width]="300"
+    [height]="280"
+    [showTitle]="true"
+    title="Delivery Details"
+    [dragEnabled]="false"
+    [closeOnOutsideClick]="true"
+    [showCloseButton]="false"
+    container=".dx-viewport"
+    [(visible)]="popupVisible"
+>
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar="bottom"
+      location="after"
+      [options]="closeButtonOptions"
+    >
+    </dxi-toolbar-item>
+
+</dx-popup>
