@@ -108,15 +108,15 @@ export const navigation = [
     items: [
       {
         text: 'Elissa',
-        path: '/historyelissa'
+        path: '/historyElissa'
       },
       {
         text: 'Projector',
-        path: '/historyprojector'
+        path: '/historyProjector'
       },
       {
         text: 'Logs',
-        path: '/historylogs'
+        path: '/historyLogs'
       }
     ]
   },

@@ -27,9 +27,6 @@ import { RuntimeEvolutionByProductVersionComponent } from './pages/Reports/runti
 import { TestCasesRuntimeEvolutionComponent } from './pages/Reports/test-cases-runtime-evolution/test-cases-runtime-evolution.component';
 import { DeliveryComponent } from './pages/delivery/delivery.component';
 import { EventsComponent } from './pages/events/events.component';
-import { HistoryElissaComponent } from './pages/History/history-elissa/history-elissa.component';
-import { HistoryProjeqtorComponent } from './pages/History/history-projeqtor/history-projeqtor.component';
-import { HistoryLogsComponent } from './pages/History/history-logs/history-logs.component';
 import { SettingsUsersComponent } from './pages/Settings/settings-users/settings-users.component';
 import { SettingsAtboxComponent } from './pages/Settings/settings-atbox/settings-atbox.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -40,6 +37,7 @@ import { DxAccordionModule, DxButtonModule, DxDataGridModule, DxPopupModule, DxS
 import { TestCaseRunDetailsComponent } from './sous pages/test-case-run-details/test-case-run-details.component';
 import { TestCaseRunSousDetailsComponent } from './sous pages/test-case-run-sous-details/test-case-run-sous-details.component';
 import { TestSessionDetailComponent } from './sous pages/test-session-detail/test-session-detail.component';
+import { HistoryComponent } from './pages/history/history.component';
 
 @NgModule({
   declarations: [
@@ -63,9 +61,6 @@ import { TestSessionDetailComponent } from './sous pages/test-session-detail/tes
     TestCasesRuntimeEvolutionComponent,
     DeliveryComponent,
     EventsComponent,
-    HistoryElissaComponent,
-    HistoryProjeqtorComponent,
-    HistoryLogsComponent,
     SettingsUsersComponent,
     SettingsAtboxComponent,
     ProductsComponentsDetailComponent,
@@ -73,7 +68,8 @@ import { TestSessionDetailComponent } from './sous pages/test-session-detail/tes
     ProductsComponentsVersionsDetailComponent,
     TestCaseRunDetailsComponent,
     TestCaseRunSousDetailsComponent,
-    TestSessionDetailComponent
+    TestSessionDetailComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
