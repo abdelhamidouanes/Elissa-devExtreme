@@ -1,6 +1,50 @@
 <h2 class="content-block">Test Sessions</h2>
 <div class="content-block">
-    <div class="dx-card responsive-paddings">
-        <p>test123</p>
-    </div>
+    <dx-data-grid
+  id="gridContainer"
+  [dataSource]="testSessions"
+  keyExpr="ID_Session"
+  [showBorders]="true"
+>
+  <dxi-column dataField="ID_Session" [width]="70" caption="ID"></dxi-column>
+  <dxi-column dataField="Name_Session"></dxi-column>
+  
+  <dxi-column dataField="Type_Session"></dxi-column>
+  <dxi-column dataField="Name_Product" [width]="170"></dxi-column>
+  <dxi-column dataField="Version" [width]="125"></dxi-column>
+
+
+  <dxi-column dataField="Status_PQ"></dxi-column>
+  <dxi-column dataField="IdPQ"></dxi-column>
+  <dxi-column dataField="Created_date" dataType="date"></dxi-column>
+  <dxi-column dataField="Created_by"></dxi-column>
+  
+  <dxi-column dataField="Action"></dxi-column>
+  <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
+  
+  <div *dxTemplate="let tLd of 'detail'">
+    <div id="accordion">
+      <dx-accordion
+        #accordion
+        [dataSource]="[null]"
+        [collapsible]="true"
+        [multiple]="true"
+        [animationDuration]="300"
+        >
+        <div *dxTemplate="let detailTld of 'title'">
+          <h1>Test Cases</h1> 
+        </div>   
+        <div *dxTemplate="let detailTld of 'item'">
+    
+          <app-test-session-details *ngIf="tLd.data.testlist != null" [testListData]="tLd.data.testlist"></app-test-session-details>
+    
+        </div>      
+      </dx-accordion>
+    
+      </div>
+  </div>
+
+
+
+</dx-data-grid>
 </div>
