@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { Subscription } from 'rxjs';
 import { TestSessionService } from 'src/app/shared/services/test-session.service';
 
 @Component({
@@ -12,24 +12,12 @@ export class TestSessionComponent implements OnInit {
   testSessions: any[];
   testSessionsSubscription: Subscription;
 
-  popupVisible = false;
-
-  closeButtonOptions: any;
-
-
   constructor(private testSessionsService: TestSessionService) {
     this.testSessions = [];
     this.testSessionsSubscription = new Subscription();
-
-    this.closeButtonOptions = {
-      text: 'Close',
-      onClick(e: any) {
-        this.popupVisible = false;
-      },
-    };
    }
 
-   async ngOnInit(): Promise<void> {
+  async ngOnInit(): Promise<void> {
     await this.testSessionsService.getTestSessions();
     this.testSessionsSubscription = this.testSessionsService.testSessionsSubject.subscribe((data: any) => {
       let counter = 0;
@@ -39,7 +27,11 @@ export class TestSessionComponent implements OnInit {
       }
     });
     this.testSessionsService.emitTestSessions();
-    console.log(this.testSessions);
+  }
+
+
+  onSeeDetailClick(cell: any): void{
+
   }
 
   ngOnDestroy(): void {

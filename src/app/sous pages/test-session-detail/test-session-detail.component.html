@@ -1,0 +1,7 @@
+<div class="list-container">   
+  <dx-list [dataSource]="data" height="100%" pageLoadMode="scrollBottom">
+      <div *dxTemplate="let item of 'item'">
+          <div>{{ item.ID_Test }}: {{ item.Test_Name }}</div>
+      </div>
+  </dx-list>
+</div>

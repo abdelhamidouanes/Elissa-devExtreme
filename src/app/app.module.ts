@@ -32,7 +32,6 @@ import { HistoryProjeqtorComponent } from './pages/History/history-projeqtor/his
 import { HistoryLogsComponent } from './pages/History/history-logs/history-logs.component';
 import { SettingsUsersComponent } from './pages/Settings/settings-users/settings-users.component';
 import { SettingsAtboxComponent } from './pages/Settings/settings-atbox/settings-atbox.component';
-<<<<<<< HEAD
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponentsDetailComponent } from './sous pages/products-components-detail/products-components-detail.component';
 import { DetailPopUpComponent } from './shared/components/detail-pop-up/detail-pop-up.component';
@@ -40,14 +39,7 @@ import { ProductsComponentsVersionsDetailComponent } from './sous pages/products
 import { DxAccordionModule, DxButtonModule, DxDataGridModule, DxPopupModule, DxScrollViewModule, DxTemplateModule } from 'devextreme-angular';
 import { TestCaseRunDetailsComponent } from './sous pages/test-case-run-details/test-case-run-details.component';
 import { TestCaseRunSousDetailsComponent } from './sous pages/test-case-run-sous-details/test-case-run-sous-details.component';
-import { TestSessionDetailsComponent } from './sous pages/test-session-details/test-session-details.component';
-=======
-import { DxAccordionModule, DxDataGridModule, DxListModule, DxPopupModule } from 'devextreme-angular';
-import { HttpClientModule } from '@angular/common/http';
-import { ProductsComponentsDetailComponent } from './sous pages/products-components-detail/products-components-detail.component';
-import { TestSessionDetailsComponent } from './sous pages/test-session-details/test-session-details.component';
-
->>>>>>> Feat/V1.0.0-5/TestSession
+import { TestSessionDetailComponent } from './sous pages/test-session-detail/test-session-detail.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +73,7 @@ import { TestSessionDetailsComponent } from './sous pages/test-session-details/t
     ProductsComponentsVersionsDetailComponent,
     TestCaseRunDetailsComponent,
     TestCaseRunSousDetailsComponent,
-    TestSessionDetailsComponent
+    TestSessionDetailComponent
   ],
   imports: [
     BrowserModule,

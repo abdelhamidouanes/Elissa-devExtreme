@@ -1,50 +1,45 @@
 <h2 class="content-block">Test Sessions</h2>
 <div class="content-block">
-    <dx-data-grid
-  id="gridContainer"
-  [dataSource]="testSessions"
-  keyExpr="ID_Session"
-  [showBorders]="true"
->
-  <dxi-column dataField="ID_Session" [width]="70" caption="ID"></dxi-column>
-  <dxi-column dataField="Name_Session"></dxi-column>
-  
-  <dxi-column dataField="Type_Session"></dxi-column>
-  <dxi-column dataField="Name_Product" [width]="170"></dxi-column>
-  <dxi-column dataField="Version" [width]="125"></dxi-column>
+  <div class="dx-card responsive-paddings">
+      <dx-data-grid
+        id="gridContainer"
+        [dataSource]="testSessions"        
+        [showBorders]="true"
+        [columnAutoWidth]="true"
+        [columnHidingEnabled]="true"
+        keyExpr="ID_Session" 
+        [height]="700">
 
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
 
-  <dxi-column dataField="Status_PQ"></dxi-column>
-  <dxi-column dataField="IdPQ"></dxi-column>
-  <dxi-column dataField="Created_date" dataType="date"></dxi-column>
-  <dxi-column dataField="Created_by"></dxi-column>
-  
-  <dxi-column dataField="Action"></dxi-column>
-  <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
-  
-  <div *dxTemplate="let tLd of 'detail'">
-    <div id="accordion">
-      <dx-accordion
-        #accordion
-        [dataSource]="[null]"
-        [collapsible]="true"
-        [multiple]="true"
-        [animationDuration]="300"
-        >
-        <div *dxTemplate="let detailTld of 'title'">
-          <h1>Test Cases</h1> 
-        </div>   
-        <div *dxTemplate="let detailTld of 'item'">
-    
-          <app-test-session-details *ngIf="tLd.data.testlist != null" [testListData]="tLd.data.testlist"></app-test-session-details>
-    
-        </div>      
-      </dx-accordion>
-    
-      </div>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+        <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+        <dxi-column dataField="ID_Session" caption="ID"></dxi-column>
+        <dxi-column dataField="Name_Session" caption="Name"></dxi-column>
+        <dxi-column dataField="Type_Session" caption="Type"></dxi-column>
+        <dxi-column dataField="Name_Product" caption="Product"></dxi-column>
+        <dxi-column dataField="Version" caption="Version"></dxi-column>
+        <dxi-column dataField="Status_PQ" caption="Status"></dxi-column>
+        <dxi-column dataField="IdPQ" caption="Id PQ"></dxi-column>
+        <dxi-column dataField="Created_date" caption="Launch time"></dxi-column>
+        <dxi-column dataField="Created_by" caption="Launched By"></dxi-column>
+        
+        <dxi-column caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
+          <div *dxTemplate="let cell of 'cellTemplate'" class="action">
+              <em class="fas fa-eye" (click)="onSeeDetailClick(cell)"></em>
+          </div>
+        </dxi-column>
+      
+        <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
+        <div *dxTemplate="let tLd of 'detail'">
+            <app-test-session-detail *ngIf="tLd.data.testlist != null" [data]="tLd.data.testlist"></app-test-session-detail>
+        </div>
+
+      </dx-data-grid>
   </div>
-
-
-
-</dx-data-grid>
 </div>

@@ -11,7 +11,7 @@ export class TestSessionService {
 
   apiUrl = environment.apiUrl;
 
-  private testSessions: any;
+  private testSessions: any[];
   testSessionsSubject : Subject<any>;
 
   constructor(private httpClient: HttpClient) {
