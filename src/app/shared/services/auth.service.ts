@@ -1,3 +1,5 @@
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
 
@@ -7,14 +9,13 @@ export interface IUser {
 }
 
 const defaultPath = '/';
-const defaultUser = {
-  email: 'sandra@example.com',
-  avatarUrl: 'https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/images/employees/06.png'
-};
 
 @Injectable()
 export class AuthService {
-  private _user: IUser | null = defaultUser;
+
+  private _user: any;
+  apiUrl = environment.apiUrl;
+
   get loggedIn(): boolean {
     return !!this._user;
   }
@@ -23,15 +24,18 @@ export class AuthService {
   set lastAuthenticatedPath(value: string) {
     this._lastAuthenticatedPath = value;
   }
-
-  constructor(private router: Router) { }
+  constructor(private router: Router, private httpClient: HttpClient) { }
 
   async logIn(email: string, password: string) {
 
     try {
-      // Send request
-      console.log(email, password);
-      this._user = { ...defaultUser, email };
+      let httpBody = new FormData();
+      httpBody.append('username', email);
+      httpBody.append('password', password);
+      await this.httpClient.post<any>(this.apiUrl+'admin/check_authentication.php', httpBody).toPromise();
+      this._user = {email: email,
+                    avatarUrl: './assets/img/userAvatar.png'
+                   };
       this.router.navigate([this._lastAuthenticatedPath]);
 
       return {
@@ -46,6 +50,7 @@ export class AuthService {
       };
     }
   }
+
 
   async getUser() {
     try {
