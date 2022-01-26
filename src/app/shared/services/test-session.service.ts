@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 
-export class C {
+export class TestSessionService {
 
   apiUrl = environment.apiUrl;
 

@@ -31,9 +31,11 @@ import { HistoryProjeqtorComponent } from './pages/History/history-projeqtor/his
 import { HistoryLogsComponent } from './pages/History/history-logs/history-logs.component';
 import { SettingsUsersComponent } from './pages/Settings/settings-users/settings-users.component';
 import { SettingsAtboxComponent } from './pages/Settings/settings-atbox/settings-atbox.component';
-import { DxDataGridModule, DxPopupModule } from 'devextreme-angular';
+import { DxAccordionModule, DxDataGridModule, DxListModule, DxPopupModule } from 'devextreme-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponentsDetailComponent } from './sous pages/products-components-detail/products-components-detail.component';
+import { TestSessionDetailsComponent } from './sous pages/test-session-details/test-session-details.component';
+
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { ProductsComponentsDetailComponent } from './sous pages/products-compone
     HistoryLogsComponent,
     SettingsUsersComponent,
     SettingsAtboxComponent,
-    ProductsComponentsDetailComponent
+    ProductsComponentsDetailComponent,
+    TestSessionDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +81,10 @@ import { ProductsComponentsDetailComponent } from './sous pages/products-compone
     AppRoutingModule,
     HttpClientModule,
     DxDataGridModule,
-    DxPopupModule
+    DxPopupModule,
+    DxAccordionModule,
+    DxListModule,
+   
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent]

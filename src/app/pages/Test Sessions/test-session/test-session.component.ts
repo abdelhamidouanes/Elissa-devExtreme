@@ -31,7 +31,7 @@ export class TestSessionComponent implements OnInit {
 
    async ngOnInit(): Promise<void> {
     await this.testSessionsService.getTestSessions();
-    this.testSessionsSubscription = this.testSessionsService.productsSubject.subscribe((data: any) => {
+    this.testSessionsSubscription = this.testSessionsService.testSessionsSubject.subscribe((data: any) => {
       let counter = 0;
       for (let key in data) {
         this.testSessions[counter]=data[key];
@@ -39,6 +39,7 @@ export class TestSessionComponent implements OnInit {
       }
     });
     this.testSessionsService.emitTestSessions();
+    console.log(this.testSessions);
   }
 
   ngOnDestroy(): void {
