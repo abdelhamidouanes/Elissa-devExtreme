@@ -69,6 +69,11 @@ export class DetailPopUpService {
         this.emitDetails();
         break; 
       }
+      case 'events-session-detail': {
+        this.details = await this.httpClient.get<any>(this.apiUrl+'testSession/read_single.php?ID='+id).toPromise();
+        this.emitDetails();
+        break; 
+      }
    } 
   }
 

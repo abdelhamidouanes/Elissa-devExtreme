@@ -23,7 +23,7 @@
         <dxi-column dataField="ID_Session" caption="ID Session" cellTemplate="cellbtn">
             <div *dxTemplate="let cell of 'cellbtn'">
               
-              <button class="status"  role="button">#{{cell.text}}</button>
+              <button class="status"  (click)=onSeeDetailSessionClick(cell) role="button">#{{cell.text}}</button>
              
           </div>
 
@@ -50,8 +50,8 @@
         <dxi-column dataField="Created_date" caption="Created Date"></dxi-column>
         <dxi-column  caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
             <div *dxTemplate="let cell of 'cellTemplate'" class="action">
-                <em class="fas fa-eye actionView" (click)="onSeeDetailClick(cell)"></em>
-                <em *ngIf="cell.data.Status == 'Open'" class="fas fa-edit actionEdit"></em>
+                <em class="fas fa-eye actionView" (click)="onSeeDetailClick(cell)" ></em>
+                <em *ngIf="cell.data.Status == 'Open'" class="fas fa-edit actionEdit" (click)="editPopup(cell)"></em>
                 <em *ngIf="cell.data.Status == 'Open' && cell.data.Planning == 'Fixed'" class="fas fa-play actionPlay"></em>
                 <em *ngIf="cell.data.Status == 'Open'" class="fas fa-trash actionDelete"></em>
             </div>              
@@ -60,3 +60,4 @@
     </div>
 </div>
 <app-detail-pop-up [event]="seeDetailSubject" [title]="popUpTitle"></app-detail-pop-up>
+<app-edit-pop-up [event]="updateEvent" [title]="popUpTitle"></app-edit-pop-up>

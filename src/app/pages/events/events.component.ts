@@ -12,7 +12,7 @@ export class EventsComponent implements OnInit {
   eventsSubscription: Subscription;
 
   seeDetailSubject: Subject<any> = new Subject<any>();
-
+  updateEvent: Subject<any> = new Subject<any>();
   popUpTitle = '';
 
 
@@ -43,7 +43,15 @@ export class EventsComponent implements OnInit {
     this.seeDetailSubject.next({'page': 'events-product-detail', 'id': cell.data.ID_Product});
   }
 
-  
+  onSeeDetailSessionClick(cell:any):void{
+    this.popUpTitle = 'Session Details';
+    this.seeDetailSubject.next({'page': 'events-session-detail', 'id': cell.data.ID_Session});
+  }
+  editPopup(cell:any):void{
+    this.popUpTitle='Update event';
+    this.updateEvent.next({'id':cell.data.ID});
+    
+  }
   ngOnDestroy(): void {
     this.eventsSubscription.unsubscribe();
   }

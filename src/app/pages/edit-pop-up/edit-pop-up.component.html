@@ -1,0 +1,39 @@
+<dx-popup
+[width]="600"
+[height]="300"
+[showTitle]="true"
+title="Information"
+[dragEnabled]="false"
+[closeOnOutsideClick]="true"
+[showCloseButton]="false"
+container=".dx-viewport"
+[(visible)]="popupVisible"
+class="container"
+>
+    <div class="container">
+        <div class="containt">
+            <div class="dx-field">
+                <div class="dx-field-label">Status</div>
+                <div class="dx-field-value">
+                <dx-select-box
+                    [dataSource]="status"
+                    displayExpr="Name"
+                    valueExpr="ID"
+                    
+                ></dx-select-box>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <dx-button
+            stylingMode="contained"
+            text="Close"
+            type="normal"
+            [width]="80"
+            (click)="closePopUp()"
+            >
+            </dx-button>
+        </div>
+    </div>
+</dx-popup>
