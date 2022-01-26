@@ -22,7 +22,7 @@ export class TestCaseRunComponent implements OnInit , OnDestroy{
   }
 
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.testCaseRunSubscription.unsubscribe();
   }
 
   async ngOnInit(): Promise<void> {

@@ -1,6 +1,45 @@
 <h2 class="content-block">Test Sessions</h2>
 <div class="content-block">
-    <div class="dx-card responsive-paddings">
-        <p>test123</p>
-    </div>
+  <div class="dx-card responsive-paddings">
+      <dx-data-grid
+        id="gridContainer"
+        [dataSource]="testSessions"        
+        [showBorders]="true"
+        [columnAutoWidth]="true"
+        [columnHidingEnabled]="true"
+        keyExpr="ID_Session" 
+        [height]="700">
+
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+        <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+        <dxi-column dataField="ID_Session" caption="ID"></dxi-column>
+        <dxi-column dataField="Name_Session" caption="Name"></dxi-column>
+        <dxi-column dataField="Type_Session" caption="Type"></dxi-column>
+        <dxi-column dataField="Name_Product" caption="Product"></dxi-column>
+        <dxi-column dataField="Version" caption="Version"></dxi-column>
+        <dxi-column dataField="Status_PQ" caption="Status"></dxi-column>
+        <dxi-column dataField="IdPQ" caption="Id PQ"></dxi-column>
+        <dxi-column dataField="Created_date" caption="Launch time"></dxi-column>
+        <dxi-column dataField="Created_by" caption="Launched By"></dxi-column>
+        
+        <dxi-column caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
+          <div *dxTemplate="let cell of 'cellTemplate'" class="action">
+              <em class="fas fa-eye" (click)="onSeeDetailClick(cell)"></em>
+          </div>
+        </dxi-column>
+      
+        <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
+        <div *dxTemplate="let tLd of 'detail'">
+            <app-test-session-detail *ngIf="tLd.data.testlist != null" [data]="tLd.data.testlist"></app-test-session-detail>
+        </div>
+
+      </dx-data-grid>
+  </div>
 </div>
