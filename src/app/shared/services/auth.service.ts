@@ -2,6 +2,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 export interface IUser {
   email: string;
@@ -17,14 +18,14 @@ export class AuthService {
   apiUrl = environment.apiUrl;
 
   get loggedIn(): boolean {
-    return !!this._user;
+      return !!this.cookieService.get('Email');
   }
 
   private _lastAuthenticatedPath: string = defaultPath;
   set lastAuthenticatedPath(value: string) {
     this._lastAuthenticatedPath = value;
   }
-  constructor(private router: Router, private httpClient: HttpClient) { }
+  constructor(private router: Router, private httpClient: HttpClient, private cookieService: CookieService) { }
 
   async logIn(email: string, password: string) {
 
@@ -32,16 +33,33 @@ export class AuthService {
       let httpBody = new FormData();
       httpBody.append('username', email);
       httpBody.append('password', password);
-      await this.httpClient.post<any>(this.apiUrl+'admin/check_authentication.php', httpBody).toPromise();
-      this._user = {email: email,
-                    avatarUrl: './assets/img/userAvatar.png'
-                   };
-      this.router.navigate([this._lastAuthenticatedPath]);
-
-      return {
-        isOk: true,
-        data: this._user
-      };
+      let userData = await this.httpClient.post<any>(this.apiUrl+'admin/check_authentication.php', httpBody).toPromise();
+     
+      httpBody = new FormData();
+      httpBody.append('apikey', userData.Apik);
+      let keyVerification = await this.httpClient.post<any>(this.apiUrl+'admin/verify_apikey.php', httpBody).toPromise();
+  
+      if(keyVerification.status == 'valid'){
+        this.cookieService.set('Login', keyVerification.Login);
+        this.cookieService.set('Email', keyVerification.email);
+        this.cookieService.set('Apikey', keyVerification.Apikey);
+        this._user = {
+                      email: keyVerification.email,
+                      avatarUrl: './assets/img/userAvatar.png'
+                     };
+        this.router.navigate([this._lastAuthenticatedPath]);
+  
+        return {
+          isOk: true,
+          data: this._user
+        };
+      }
+      else{
+        return {
+          isOk: false,
+          message: "Authentication failed"
+        };
+      }
     }
     catch {
       return {
@@ -54,12 +72,25 @@ export class AuthService {
 
   async getUser() {
     try {
-      // Send request
-
-      return {
-        isOk: true,
-        data: this._user
-      };
+      let httpBody = new FormData();
+      httpBody.append('apikey', this.cookieService.get('Apikey'));
+      let keyVerification = await this.httpClient.post<any>(this.apiUrl+'admin/verify_apikey.php', httpBody).toPromise();
+      if(keyVerification.status == 'valid'){
+        this._user = {
+          email: keyVerification.email,
+          avatarUrl: './assets/img/userAvatar.png'
+        };
+        return {
+          isOk: true,
+          data: this._user
+        };
+      }
+      else{
+        return {
+          isOk: false,
+          data: null
+        };
+      }
     }
     catch {
       return {
@@ -123,6 +154,9 @@ export class AuthService {
 
   async logOut() {
     this._user = null;
+    this.cookieService.delete('Email');
+    this.cookieService.delete('Apikey');
+    this.cookieService.delete('Login');
     this.router.navigate(['/login-form']);
   }
 }
