@@ -27,6 +27,28 @@ export class AuthService {
   }
   constructor(private router: Router, private httpClient: HttpClient, private cookieService: CookieService) { }
 
+
+  async verifyApiKey(){
+    try {
+      let httpBody = new FormData();
+      httpBody.append('apikey', this.cookieService.get('Apikey'));
+      let keyVerification = await this.httpClient.post<any>(this.apiUrl+'admin/verify_apikey.php', httpBody).toPromise();
+  
+      if(keyVerification.status == 'valid'){
+       return true;
+      }
+      else{
+        this.logOut();
+        return false;
+      }
+    }
+    catch {
+      this.logOut();
+      return false;
+    }
+  }
+
+
   async logIn(email: string, password: string) {
 
     try {

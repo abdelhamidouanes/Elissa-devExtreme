@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { CustomerService } from 'src/app/shared/services/customer.service';
+import { TestCaseRunsAnalysisService } from 'src/app/shared/services/test-case-runs-analysis.service';
 
 @Component({
   selector: 'app-test-case-runs-analysis',
@@ -9,26 +9,27 @@ import { CustomerService } from 'src/app/shared/services/customer.service';
 })
 export class TestCaseRunsAnalysisComponent implements OnInit,OnDestroy {
 
-  customers: any[];
-  customersSubscription: Subscription;
+  testCaseRunsAnalysis: any[];
+  testCaseRunsAnalysisSubscription: Subscription;
 
   seeDetailSubject: Subject<any> = new Subject<any>();
 
-  constructor(private customerService: CustomerService) {
-    this.customers = [];
-    this.customersSubscription = new Subscription();
+  constructor(private testCaseRunsAnalysisService: TestCaseRunsAnalysisService) {
+    this.testCaseRunsAnalysis = [];
+    this.testCaseRunsAnalysisSubscription = new Subscription();
   }
+
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.testCaseRunsAnalysisSubscription.unsubscribe();
   }
 
  
   async ngOnInit(): Promise<void> {
-    await this.customerService.getAllCustomers();
-    this.customersSubscription = this.customerService.customersSubject.subscribe(data => {
-      this.customers = data.issues;
+    await this.testCaseRunsAnalysisService.getTestCaseRunsAnalysis();
+    this.testCaseRunsAnalysisSubscription = this.testCaseRunsAnalysisService.testCaseRunsAnalysisSubject.subscribe(data => {
+      this.testCaseRunsAnalysis = data.issues;
     });
-    this.customerService.emitCustomers();
+    this.testCaseRunsAnalysisService.emitTestCaseRunsAnalysis();
   }
 
   

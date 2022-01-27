@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class HistoryService {
   
   apiUrl = environment.apiUrl;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private authService: AuthService) {
     this.history = [];
     this.historySubject = new Subject<any>(); 
   }
@@ -24,12 +25,16 @@ export class HistoryService {
   }
 
   async getHistoryElissa(): Promise<void> {
-    this.history = await this.httpClient.get<any>(this.apiUrl + 'history/read.php?origin=Ellissa').toPromise();
-    this.emithistory();
+    if(await this.authService.verifyApiKey()){
+      this.history = await this.httpClient.get<any>(this.apiUrl + 'history/read.php?origin=Ellissa').toPromise();
+      this.emithistory();
+    }
   }
 
   async getHistoryProjector(): Promise<void> {
-    this.history = await this.httpClient.get<any>(this.apiUrl + 'history/read.php?origin=projeqtor').toPromise();
-    this.emithistory();
+    if(await this.authService.verifyApiKey()){
+      this.history = await this.httpClient.get<any>(this.apiUrl + 'history/read.php?origin=projeqtor').toPromise();
+      this.emithistory();
+    }
   }
 }

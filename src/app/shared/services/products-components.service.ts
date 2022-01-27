@@ -2,6 +2,7 @@ import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ProductsComponentsService {
   private components: Map<string,any>;
   componentsSubject : Subject<Map<string,any>>;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private authService: AuthService) {
     this.products = [];
     this.productsSubject = new Subject<any>();
 
@@ -33,19 +34,18 @@ export class ProductsComponentsService {
   }
 
   async getProducts(): Promise<void>{
-    this.products = await this.httpClient.get<any>(this.apiUrl+'product/read.php?IdProd=0&IdVersion=0').toPromise();
-    this.emitProducts();
+    if(await this.authService.verifyApiKey()){
+      this.products = await this.httpClient.get<any>(this.apiUrl+'product/read.php?IdProd=0&IdVersion=0').toPromise();
+      this.emitProducts();
+    }
   }
 
   async getComponents(idProd: any): Promise<void>{
-    const components = await this.httpClient.get<any>(this.apiUrl+'product/read.php?IdProd='+idProd+'&IdVersion=0').toPromise();
-    this.components.set(idProd,components);
-    this.emitComponents();
-  }
-
-  initComponents(): void{
-    this.components = new Map<string,any>();
-    this.emitComponents();
+    if(await this.authService.verifyApiKey()){
+      const components = await this.httpClient.get<any>(this.apiUrl+'product/read.php?IdProd='+idProd+'&IdVersion=0').toPromise();
+      this.components.set(idProd,components);
+      this.emitComponents();
+    }
   }
 
 }

@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -13,7 +14,7 @@ export class DeliveryService {
   
   apiUrl = environment.apiUrl;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private authService: AuthService) {
     this.deliverys = [];
     this.deliverisSubject = new Subject<any>(); 
   }
@@ -24,8 +25,10 @@ export class DeliveryService {
   }
 
   async getdeliverys(): Promise<void> {
-    this.deliverys = await this.httpClient.get<any>(this.apiUrl + 'delivery/read.php').toPromise();
-    this.emitDeliveris();
+    if(await this.authService.verifyApiKey()){
+      this.deliverys = await this.httpClient.get<any>(this.apiUrl + 'delivery/read.php').toPromise();
+      this.emitDeliveris();
+    }
   }
 
 }
