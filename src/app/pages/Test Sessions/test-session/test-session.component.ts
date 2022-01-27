@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { TestSessionService } from 'src/app/shared/services/test-session.service';
 
 @Component({
@@ -12,10 +12,12 @@ export class TestSessionComponent implements OnInit {
   testSessions: any[];
   testSessionsSubscription: Subscription;
 
+  seeDetailSubject: Subject<any> = new Subject<any>();
+
   constructor(private testSessionsService: TestSessionService) {
     this.testSessions = [];
     this.testSessionsSubscription = new Subscription();
-   }
+  }
 
   async ngOnInit(): Promise<void> {
     await this.testSessionsService.getTestSessions();
@@ -31,7 +33,7 @@ export class TestSessionComponent implements OnInit {
 
 
   onSeeDetailClick(cell: any): void{
-
+    this.seeDetailSubject.next({'page': 'test-session', 'id': cell.data.ID_Session});
   }
 
   ngOnDestroy(): void {
