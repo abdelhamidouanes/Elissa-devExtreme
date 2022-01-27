@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class DeliveryService {
   
   apiUrl = environment.apiUrl;
 
-  constructor(private httpClient: HttpClient, private authService: AuthService) {
+  constructor(private httpClient: HttpClient, private authService: AuthService,private loadingService: LoadingService) {
     this.deliverys = [];
     this.deliverisSubject = new Subject<any>(); 
   }
@@ -25,10 +26,12 @@ export class DeliveryService {
   }
 
   async getdeliverys(): Promise<void> {
+    this.loadingService.afficherDisplayLoading();
     if(await this.authService.verifyApiKey()){
       this.deliverys = await this.httpClient.get<any>(this.apiUrl + 'delivery/read.php').toPromise();
       this.emitDeliveris();
     }
+    this.loadingService.cacherDisplayLoading();
   }
 
 }

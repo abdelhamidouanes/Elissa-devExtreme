@@ -5,3 +5,18 @@
   height: 100%;
   width: 100%;
 }
+.popup-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.popup-container em{
+  margin-bottom: 16px;
+  font-size: 20px;
+  color: var(--theme-color);
+}
+.popup-container p{
+  margin: 0;
+  font-weight: bold;
+}

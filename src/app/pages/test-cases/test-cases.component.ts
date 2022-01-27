@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { TestCaseServiceService } from 'src/app/shared/services/test-case-service.service';
+import { TestCaseService } from 'src/app/shared/services/test-case.service';
 
 @Component({
   selector: 'app-test-cases',
@@ -14,7 +14,7 @@ export class TestCasesComponent implements OnInit {
 
   seeDetailSubject: Subject<any> = new Subject<any>();
   
-  constructor(private testCaseService: TestCaseServiceService) {
+  constructor(private testCaseService: TestCaseService) {
 
     this.testCases = [];
     this.testCasesSubscription = new Subscription();

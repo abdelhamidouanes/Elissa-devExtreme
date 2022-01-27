@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AuthService } from './auth.service';
+import { LoadingService } from './loading.service';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class TestCaseRunsAnalysisService {
   private  testCaseRunsAnalysis:any;
   testCaseRunsAnalysisSubject : Subject<any>;
 
-  constructor(private httpClient: HttpClient, private authService: AuthService) { 
+  constructor(private httpClient: HttpClient, private authService: AuthService, private loadingService: LoadingService) { 
     this.testCaseRunsAnalysis = [];
     this.testCaseRunsAnalysisSubject = new Subject<any>();
   }
@@ -24,9 +25,11 @@ export class TestCaseRunsAnalysisService {
   }
 
   async getTestCaseRunsAnalysis(): Promise<void>{
+    this.loadingService.afficherDisplayLoading();
     if(await this.authService.verifyApiKey()){
       this.testCaseRunsAnalysis = await this.httpClient.get<any>(this.apiUrl+'issues/read.php?ID_Product=0&Status=1&Version=0&Type=0&Index=0').toPromise();
       this.emitTestCaseRunsAnalysis();
     }
+    this.loadingService.cacherDisplayLoading();
   }
 }

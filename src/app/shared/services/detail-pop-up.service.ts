@@ -1,3 +1,4 @@
+import { LoadingService } from './loading.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -15,7 +16,7 @@ export class DetailPopUpService {
   detailssSubject : Subject<any>;
 
 
-  constructor(private httpClient: HttpClient, private authService: AuthService) { 
+  constructor(private httpClient: HttpClient, private authService: AuthService, private loadingService: LoadingService) { 
     this.detailssSubject = new Subject<any>();
   }
 
@@ -24,6 +25,7 @@ export class DetailPopUpService {
   }
 
   async getDetails(page: any, id: any): Promise<void>{
+    this.loadingService.afficherDisplayLoading();
     if(await this.authService.verifyApiKey()){
       switch(page) { 
         case 'products-components': { 
@@ -83,6 +85,7 @@ export class DetailPopUpService {
         } 
       }
     }
+    this.loadingService.cacherDisplayLoading();
   }
 
 }

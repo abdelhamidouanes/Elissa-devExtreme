@@ -1,4 +1,6 @@
+import { LoadingService } from './shared/services/loading.service';
 import { Component, HostBinding } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
 
 @Component({
@@ -11,7 +13,21 @@ export class AppComponent  {
     return Object.keys(this.screen.sizes).filter(cl => this.screen.sizes[cl]).join(' ');
   }
 
-  constructor(private authService: AuthService, private screen: ScreenService, public appInfo: AppInfoService) { }
+  displayLoading : boolean;
+  displayLoadingSubscription : Subscription;
+
+  constructor(private authService: AuthService, 
+              private screen: ScreenService, 
+              public appInfo: AppInfoService,
+              private loadingService: LoadingService) { 
+    
+    this.displayLoading = false;
+    this.displayLoadingSubscription = this.loadingService.displayLoadingSubject.subscribe(data => {
+      this.displayLoading = data;
+    });
+    this.loadingService.emitDisplayLoading();
+    
+  }
 
   isAuthenticated() {
     return this.authService.loggedIn;

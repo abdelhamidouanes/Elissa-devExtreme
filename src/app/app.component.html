@@ -12,3 +12,19 @@
 <ng-template #unauthenticated>
   <app-unauthenticated-content></app-unauthenticated-content>
 </ng-template>
+
+<dx-popup
+  [width]="200"
+  height="auto"
+  [showTitle]="false"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="false"
+  [showCloseButton]="false"
+  container=".dx-viewport"
+  [visible]="displayLoading"
+>
+  <div class="popup-container">
+    <em class="fas fa-spinner fa-pulse"></em>
+    <p>Loading</p>
+  </div>
+</dx-popup>
