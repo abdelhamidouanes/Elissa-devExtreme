@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, NgModule, Input, ViewChild, OnDestroy } from '@angular/core';
 import { SideNavigationMenuModule, HeaderModule } from '../../shared/components';
 import { ScreenService } from '../../shared/services';
 import { ItemClickEvent } from 'devextreme/ui/tree_view';
@@ -7,13 +7,16 @@ import { DxScrollViewModule, DxScrollViewComponent } from 'devextreme-angular/ui
 import { CommonModule } from '@angular/common';
 
 import { Router, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { LoadingService } from 'src/app/shared/services/loading.service';
+import { DxPopupModule } from 'devextreme-angular';
 
 @Component({
   selector: 'app-side-nav-outer-toolbar',
   templateUrl: './side-nav-outer-toolbar.component.html',
   styleUrls: ['./side-nav-outer-toolbar.component.scss']
 })
-export class SideNavOuterToolbarComponent implements OnInit {
+export class SideNavOuterToolbarComponent implements OnInit, OnDestroy {
   @ViewChild(DxScrollViewComponent, { static: true }) scrollView!: DxScrollViewComponent;
   selectedRoute = '';
 
@@ -27,8 +30,14 @@ export class SideNavOuterToolbarComponent implements OnInit {
   menuRevealMode = 'expand';
   minMenuSize = 0;
   shaderEnabled = false;
+  displayLoading : boolean;
+  displayLoadingSubscription : Subscription;
 
-  constructor(private screen: ScreenService, private router: Router) { }
+  constructor(private screen: ScreenService, private router: Router, private loadingService: LoadingService) { 
+    this.displayLoading = false;
+    this.displayLoadingSubscription = new Subscription();
+  }
+
 
   ngOnInit() {
     this.menuOpened = this.screen.sizes['screen-large'];
@@ -42,6 +51,16 @@ export class SideNavOuterToolbarComponent implements OnInit {
     this.screen.changed.subscribe(() => this.updateDrawer());
 
     this.updateDrawer();
+
+    this.displayLoadingSubscription = this.loadingService.displayLoadingSubject.subscribe(data => {
+      this.displayLoading = data;
+    });
+    this.loadingService.emitDisplayLoading();
+  }
+
+   
+  ngOnDestroy(): void {
+    this.displayLoadingSubscription.unsubscribe();
   }
 
   updateDrawer() {
@@ -93,7 +112,7 @@ export class SideNavOuterToolbarComponent implements OnInit {
 }
 
 @NgModule({
-  imports: [ SideNavigationMenuModule, DxDrawerModule, HeaderModule, DxScrollViewModule, CommonModule ],
+  imports: [ SideNavigationMenuModule, DxDrawerModule, HeaderModule, DxScrollViewModule, CommonModule, DxPopupModule ],
   exports: [ SideNavOuterToolbarComponent ],
   declarations: [ SideNavOuterToolbarComponent ]
 })
