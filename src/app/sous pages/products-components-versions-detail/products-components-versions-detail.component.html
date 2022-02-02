@@ -4,9 +4,10 @@
   [columnAutoWidth]="true"
   *ngIf="components.get(parentData.ID_Product+parentData.Version+parentData.patch) != null"
   [columnHidingEnabled]="true"
+  [height]="325"
 >
 
-  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-paging [pageSize]="5"></dxo-paging>
   <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
 
   <dxo-filter-row [visible]="true"></dxo-filter-row>

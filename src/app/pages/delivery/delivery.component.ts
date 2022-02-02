@@ -20,7 +20,7 @@ export class DeliveryComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.deliveryService.getdeliverys();
+    await this.deliveryService.getDeliverys();
     this.deliverysSubscription = this.deliveryService.deliverisSubject.subscribe(data => {
       this.deliverys = data.deliverys;
     });

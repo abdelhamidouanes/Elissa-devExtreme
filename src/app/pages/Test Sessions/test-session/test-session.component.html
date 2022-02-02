@@ -2,9 +2,9 @@
 
 <div class="content-block">
   <div class="dx-field">
-    <div class="dx-field-label">Date picker</div>
+    <div class="dx-field-label">Date :</div>
     <div class="dx-field-value">
-      <dx-date-box  [value]="value" pickerType="rollers" displayFormat="MMMM  yyyy" (onValueChanged)="onValueChanged($event)"> </dx-date-box>
+      <dx-date-box  [(value)]="value" pickerType="rollers" displayFormat="MMMM  yyyy" (onValueChanged)="onValueChanged($event)"> </dx-date-box>
     </div>
   </div>
   <div class="dx-card responsive-paddings">
@@ -50,3 +50,4 @@
       </dx-data-grid>
   </div>
 </div>
+<app-detail-pop-up [event]="seeDetailSubject" title="Test Session Details"></app-detail-pop-up>

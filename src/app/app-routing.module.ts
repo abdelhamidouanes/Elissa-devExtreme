@@ -22,12 +22,10 @@ import { RuntimeEvolutionByProductVersionComponent } from './pages/Reports/runti
 import { TestCasesRuntimeEvolutionComponent } from './pages/Reports/test-cases-runtime-evolution/test-cases-runtime-evolution.component';
 import { DeliveryComponent } from './pages/delivery/delivery.component';
 import { EventsComponent } from './pages/events/events.component';
-import { HistoryElissaComponent } from './pages/History/history-elissa/history-elissa.component';
-import { HistoryProjeqtorComponent } from './pages/History/history-projeqtor/history-projeqtor.component';
-import { HistoryLogsComponent } from './pages/History/history-logs/history-logs.component';
 import { SettingsUsersComponent } from './pages/Settings/settings-users/settings-users.component';
 import { SettingsAtboxComponent } from './pages/Settings/settings-atbox/settings-atbox.component';
 import { TestCaseRunDetailsComponent } from './sous pages/test-case-run-details/test-case-run-details.component';
+import { HistoryComponent } from './pages/history/history.component';
 
 const routes: Routes = [
   {
@@ -126,18 +124,21 @@ const routes: Routes = [
     canActivate: [ AuthGuardService ]
   },
   {
-    path: 'historyelissa',
-    component: HistoryElissaComponent,
+    path: 'historyElissa',
+    component: HistoryComponent,
+    data: {type: 'Elissa'},
     canActivate: [ AuthGuardService ]
   },
   {
-    path: 'historyprojector',
-    component: HistoryProjeqtorComponent,
+    path: 'historyProjector',
+    component: HistoryComponent,
+    data: {type: 'Projector'},
     canActivate: [ AuthGuardService ]
   },
   {
-    path: 'historylogs',
-    component: HistoryLogsComponent,
+    path: 'historyLogs',
+    component: HistoryComponent,
+    data: {type: 'logs'},
     canActivate: [ AuthGuardService ]
   },
   {

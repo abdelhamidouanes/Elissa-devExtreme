@@ -1,7 +1,10 @@
+import { AlertMsgService } from './alert-msg.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +16,7 @@ export class TestCaseRunService {
   private testCaseRun: any;
   testCaseRunSubject : Subject<any>;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private authService: AuthService, private loadingService: LoadingService, private alertMsgService: AlertMsgService) {
     this.testCaseRun = [];
     this.testCaseRunSubject = new Subject<any>();
    }
@@ -24,8 +27,18 @@ export class TestCaseRunService {
 
 
   async getTestCaseRun(): Promise<void>{
-    this.testCaseRun = await this.httpClient.get<any>(this.apiUrl+'/testRun/read.php?status=0&idProd=0&Version=0&date=2021-01&analyseStatus=1&ResultSession=1&index=0').toPromise();
-    this.emittestCaseRun();
+    this.loadingService.afficherDisplayLoading();
+    try {
+      if(await this.authService.verifyApiKey()){
+        this.testCaseRun = await this.httpClient.get<any>(this.apiUrl+'/testRun/read.php?status=0&idProd=0&Version=0&date=2021-01&analyseStatus=1&ResultSession=1&index=0').toPromise();
+        this.emittestCaseRun();
+      }
+    } catch (error) {
+      this.alertMsgService.setTitle('Erreur connexion.');
+      this.alertMsgService.setMsg('Une erreur s\'est produite lors de chargement des données');
+      this.alertMsgService.afficherDisplayAlertMsg();
+    }
+    this.loadingService.cacherDisplayLoading();
   }
 
   

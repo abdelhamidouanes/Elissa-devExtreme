@@ -1,0 +1,39 @@
+<h2 class="content-block">History {{typeHistory}}</h2>
+<div class="content-block">
+    <div class="dx-card responsive-paddings">
+        <dx-data-grid id="gridContainer" 
+        [dataSource]="history"
+        [showBorders]="true"
+        keyExpr="ID_notif"
+        [showBorders]="true"
+        [columnAutoWidth]="true"
+        [columnHidingEnabled]="true">
+        
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+        <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+        <dxi-column dataField="ID_notif" caption="ID"></dxi-column>
+        <dxi-column dataField="Type_notif" caption="Type notif"></dxi-column>
+        <dxi-column dataField="Message_notif" caption="Message notif"></dxi-column>
+        <dxi-column dataField="Status_notif" caption="Status notif"></dxi-column>
+        <dxi-column dataField="ID_From_User" caption="ID from user"></dxi-column>
+        <dxi-column dataField="ID_To_User" caption="ID to user"></dxi-column>
+        <dxi-column dataField="created_date" caption="Created date"></dxi-column>
+        <dxi-column dataField="created_time" caption="Created time"></dxi-column>
+        <dxi-column dataField="Updated_date" caption="Updated date"></dxi-column>
+        <dxi-column dataField="Read_date" caption="Read date"></dxi-column>
+        <dxi-column dataField="days" caption="Days"></dxi-column>
+        <dxi-column dataField="hours" caption="Hours"></dxi-column>
+        <dxi-column dataField="minutes" caption="Minutes"></dxi-column>
+        <dxi-column dataField="Login" caption="Login"></dxi-column>
+        <dxi-column dataField="Created_by" caption="Created by"></dxi-column>
+
+        </dx-data-grid>
+    </div>
+</div>

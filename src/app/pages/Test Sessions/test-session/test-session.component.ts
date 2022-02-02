@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { TestSessionService } from 'src/app/shared/services/test-session.service';
 
 @Component({
@@ -11,15 +11,23 @@ export class TestSessionComponent implements OnInit {
   
   testSessions: any[];
   testSessionsSubscription: Subscription;
-  date: any = new Date (2021,1,1) 
-  value : any= new Date (2021,1,1) 
+
+  currentDate : any = new Date () ;
+  value : any = new Date (this.currentDate.getFullYear() -1, this.currentDate.getMonth(), 1 ) ;
+  date: any ;
+  
+
+  seeDetailSubject: Subject<any> = new Subject<any>();
 
   constructor(private testSessionsService: TestSessionService) {
     this.testSessions = [];
     this.testSessionsSubscription = new Subscription();
-   }
+  }
 
   async ngOnInit(): Promise<void> {
+    let month = parseInt (this.value.getMonth()) +1
+    this.date = this.value.getFullYear()+"-"+ month;
+    console.log("date ", this.date )
     await this.testSessionsService.getTestSessions(this.date);
     this.testSessionsSubscription = this.testSessionsService.testSessionsSubject.subscribe((data: any) => {
       let counter = 0;
@@ -33,7 +41,7 @@ export class TestSessionComponent implements OnInit {
 
 
   onSeeDetailClick(cell: any): void{
-
+    this.seeDetailSubject.next({'page': 'test-session', 'id': cell.data.ID_Session});
   }
 
   ngOnDestroy(): void {
@@ -42,8 +50,9 @@ export class TestSessionComponent implements OnInit {
 
   async onValueChanged(e : Date = new Date()) {
     
-    this.date = this.value.getFullYear() +"-"+this.value.getMonth();
-    console.log(this.date);
+    let month =  parseInt(this.value.getMonth()) +1; 
+    this.date = this.value.getFullYear() +"-"+ month;
+    console.log(" date change ", this.date+"  "+ this.value)
     await this.testSessionsService.getTestSessions(this.date);
     this.testSessionsSubscription = this.testSessionsService.testSessionsSubject.subscribe(data => {
       let counter = 0;

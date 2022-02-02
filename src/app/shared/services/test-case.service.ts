@@ -1,36 +1,35 @@
 import { AlertMsgService } from './alert-msg.service';
-import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
 import { AuthService } from './auth.service';
 import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EventService {
-
+export class TestCaseService {
   apiUrl = environment.apiUrl;
+  private testCases: any;
+  testCasesSubject : Subject<any>;
 
-  private events: any;
-  eventsSubject : Subject<any>;
-
-  constructor(private httpClient: HttpClient, private authService: AuthService, private loadingService: LoadingService, private alertMsgService: AlertMsgService) {
-    this.events=[];
-    this.eventsSubject=new Subject<any>();
+  constructor(private httpClient: HttpClient, private authService: AuthService, private loadingService: LoadingService, private alertMsgService: AlertMsgService) 
+  { 
+    this.testCases = [];
+    this.testCasesSubject = new Subject<any>();
   }
 
-  emitEvents(): void{
-    this.eventsSubject.next(this.events);
+  emitTestCases(): void{
+    this.testCasesSubject.next(this.testCases);
   }
 
-  async getEvents(): Promise<void>{
+  async getTestCases(): Promise<void>{
     this.loadingService.afficherDisplayLoading();
     try {
       if(await this.authService.verifyApiKey()){
-        this.events = await this.httpClient.get<any>(this.apiUrl+'events/read.php?Status=1&idProd=0&Version=0').toPromise();
-        this.emitEvents();
+        this.testCases = await this.httpClient.get<any>(this.apiUrl+'test/read.php?IdProd=31&Version=0&Status=1&index=0').toPromise();
+        this.emitTestCases();
       }
     } catch (error) {
       this.alertMsgService.setTitle('Erreur connexion.');
