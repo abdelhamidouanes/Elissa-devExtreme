@@ -1,3 +1,4 @@
+import { AlertMsgService } from './alert-msg.service';
 import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -16,7 +17,7 @@ export class TestSessionService {
   private testSessions: any[];
   testSessionsSubject : Subject<any>;
 
-  constructor(private httpClient: HttpClient, private authService: AuthService, private loadingService: LoadingService) {
+  constructor(private httpClient: HttpClient, private authService: AuthService, private loadingService: LoadingService, private alertMsgService: AlertMsgService) {
     this.testSessions = [];
     this.testSessionsSubject = new Subject<any>();
 
@@ -29,9 +30,15 @@ export class TestSessionService {
 
   async getTestSessions(): Promise<void>{
     this.loadingService.afficherDisplayLoading();
-    if(await this.authService.verifyApiKey()){
-      this.testSessions = await this.httpClient.get<any>(this.apiUrl+'testSession/read.php?idProd=0&Version=0&date=2021-01&ListStatus=1&from=table&index=0').toPromise();
-      this.emitTestSessions();
+    try {
+      if(await this.authService.verifyApiKey()){
+        this.testSessions = await this.httpClient.get<any>(this.apiUrl+'testSession/read.php?idProd=0&Version=0&date=2021-01&ListStatus=1&from=table&index=0').toPromise();
+        this.emitTestSessions();
+      }
+    } catch (error) {
+      this.alertMsgService.setTitle('Erreur connexion.');
+      this.alertMsgService.setMsg('Une erreur s\'est produite lors de chargement des données');
+      this.alertMsgService.afficherDisplayAlertMsg();
     }
     this.loadingService.cacherDisplayLoading();
   }

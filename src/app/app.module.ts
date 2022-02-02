@@ -39,6 +39,7 @@ import { TestCaseRunSousDetailsComponent } from './sous pages/test-case-run-sous
 import { TestSessionDetailComponent } from './sous pages/test-session-detail/test-session-detail.component';
 import { HistoryComponent } from './pages/history/history.component';
 import { CookieService } from 'ngx-cookie-service';
+import { AlertMsgComponent } from './shared/components/alert-msg/alert-msg.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { CookieService } from 'ngx-cookie-service';
     TestCaseRunDetailsComponent,
     TestCaseRunSousDetailsComponent,
     TestSessionDetailComponent,
-    HistoryComponent
+    HistoryComponent,
+    AlertMsgComponent
   ],
   imports: [
     BrowserModule,

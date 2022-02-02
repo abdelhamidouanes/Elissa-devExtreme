@@ -1,3 +1,4 @@
+import { AlertMsgService } from './alert-msg.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -15,7 +16,7 @@ export class HistoryService {
   
   apiUrl = environment.apiUrl;
 
-  constructor(private httpClient: HttpClient, private authService: AuthService, private loadingService: LoadingService) {
+  constructor(private httpClient: HttpClient, private authService: AuthService, private loadingService: LoadingService, private alertMsgService: AlertMsgService) {
     this.history = [];
     this.historySubject = new Subject<any>(); 
   }
@@ -27,18 +28,30 @@ export class HistoryService {
 
   async getHistoryElissa(): Promise<void> {
     this.loadingService.afficherDisplayLoading();
-    if(await this.authService.verifyApiKey()){
-      this.history = await this.httpClient.get<any>(this.apiUrl + 'history/read.php?origin=Ellissa').toPromise();
-      this.emithistory();
+    try {
+      if(await this.authService.verifyApiKey()){
+        this.history = await this.httpClient.get<any>(this.apiUrl + 'history/read.php?origin=Ellissa').toPromise();
+        this.emithistory();
+      }
+    } catch (error) {
+      this.alertMsgService.setTitle('Erreur connexion.');
+      this.alertMsgService.setMsg('Une erreur s\'est produite lors de chargement des données');
+      this.alertMsgService.afficherDisplayAlertMsg();
     }
     this.loadingService.cacherDisplayLoading();
   }
 
   async getHistoryProjector(): Promise<void> {
     this.loadingService.afficherDisplayLoading();
-    if(await this.authService.verifyApiKey()){
-      this.history = await this.httpClient.get<any>(this.apiUrl + 'history/read.php?origin=projeqtor').toPromise();
-      this.emithistory();
+    try {
+      if(await this.authService.verifyApiKey()){
+        this.history = await this.httpClient.get<any>(this.apiUrl + 'history/read.php?origin=projeqtor').toPromise();
+        this.emithistory();
+      }
+    } catch (error) {
+      this.alertMsgService.setTitle('Erreur connexion.');
+      this.alertMsgService.setMsg('Une erreur s\'est produite lors de chargement des données');
+      this.alertMsgService.afficherDisplayAlertMsg();
     }
     this.loadingService.cacherDisplayLoading();
   }

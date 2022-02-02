@@ -1,3 +1,4 @@
+import { AlertMsgService } from './alert-msg.service';
 import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -18,7 +19,7 @@ export class ProductsComponentsService {
   private components: Map<string,any>;
   componentsSubject : Subject<Map<string,any>>;
 
-  constructor(private httpClient: HttpClient, private authService: AuthService, private loadingService: LoadingService) {
+  constructor(private httpClient: HttpClient, private authService: AuthService, private loadingService: LoadingService, private alertMsgService: AlertMsgService) {
     this.products = [];
     this.productsSubject = new Subject<any>();
 
@@ -36,19 +37,31 @@ export class ProductsComponentsService {
 
   async getProducts(): Promise<void>{
     this.loadingService.afficherDisplayLoading();
-    if(await this.authService.verifyApiKey()){
-      this.products = await this.httpClient.get<any>(this.apiUrl+'product/read.php?IdProd=0&IdVersion=0').toPromise();
-      this.emitProducts();
+    try {
+      if(await this.authService.verifyApiKey()){
+        this.products = await this.httpClient.get<any>(this.apiUrl+'product/read.php?IdProd=0&IdVersion=0').toPromise();
+        this.emitProducts();
+      }
+    } catch (error) {
+      this.alertMsgService.setTitle('Erreur connexion.');
+      this.alertMsgService.setMsg('Une erreur s\'est produite lors de chargement des données');
+      this.alertMsgService.afficherDisplayAlertMsg();
     }
     this.loadingService.cacherDisplayLoading();
   }
 
   async getComponents(idProd: any): Promise<void>{
     this.loadingService.afficherDisplayLoading();
-    if(await this.authService.verifyApiKey()){
-      const components = await this.httpClient.get<any>(this.apiUrl+'product/read.php?IdProd='+idProd+'&IdVersion=0').toPromise();
-      this.components.set(idProd,components);
-      this.emitComponents();
+    try {
+      if(await this.authService.verifyApiKey()){
+        const components = await this.httpClient.get<any>(this.apiUrl+'product/read.php?IdProd='+idProd+'&IdVersion=0').toPromise();
+        this.components.set(idProd,components);
+        this.emitComponents();
+      }
+    } catch (error) {
+      this.alertMsgService.setTitle('Erreur connexion.');
+      this.alertMsgService.setMsg('Une erreur s\'est produite lors de chargement des données');
+      this.alertMsgService.afficherDisplayAlertMsg();
     }
     this.loadingService.cacherDisplayLoading();
   }

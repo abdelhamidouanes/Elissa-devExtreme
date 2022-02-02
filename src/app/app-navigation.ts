@@ -1,7 +1,7 @@
-export const navigation = [
+export let navigation = [
   {
     text: 'Dashboard',
-    path: '/home',
+    path: '/dashboard',
     icon: 'fas fa-tachometer-alt'
   },
   {
