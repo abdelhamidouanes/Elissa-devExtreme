@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import {Subject} from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,8 +12,10 @@ export class TestCaseRunService {
 
   private testCaseRun: any;
   testCaseRunSubject : Subject<any>;
+  date : any ;
+ 
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, ) {
     this.testCaseRun = [];
     this.testCaseRunSubject = new Subject<any>();
    }
@@ -23,10 +25,10 @@ export class TestCaseRunService {
   }
 
 
-  async getTestCaseRun(): Promise<void>{
-    this.testCaseRun = await this.httpClient.get<any>(this.apiUrl+'/testRun/read.php?status=0&idProd=0&Version=0&date=2021-01&analyseStatus=1&ResultSession=1&index=0').toPromise();
+  async getTestCaseRun( date : any): Promise<void>{
+    this.testCaseRun = await this.httpClient.get<any>(this.apiUrl+'/testRun/read.php?status=0&idProd=0&Version=0&date='+date+'&analyseStatus=1&ResultSession=1&index=0').toPromise();
     this.emittestCaseRun();
   }
-
+ 
   
 }

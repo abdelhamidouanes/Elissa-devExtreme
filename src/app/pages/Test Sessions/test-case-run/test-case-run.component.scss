@@ -7,3 +7,15 @@
     font-size: 14px;
     font-weight: bold;
   }
+  ::ng-deep .dx-fieldset {
+  min-height: 500px;
+}
+::ng-deep .dx-dateviewroller-day {
+  display: none;
+}
+div.a{
+  position: left;
+  width: 200px;
+  height: 20px;
+ 
+} 

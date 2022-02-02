@@ -11,7 +11,9 @@ export class TestCaseServiceService {
   private testCases: any;
   testCasesSubject : Subject<any>;
 
-  constructor(private httpClient: HttpClient) 
+
+
+  constructor(private httpClient: HttpClient, ) 
   { 
     this.testCases = [];
     this.testCasesSubject = new Subject<any>();
@@ -25,5 +27,8 @@ export class TestCaseServiceService {
     this.testCases = await this.httpClient.get<any>(this.apiUrl+'test/read.php?IdProd=31&Version=0&Status=1&index=0').toPromise();
     this.emitTestCases();
   }
+
+  
+ 
 
 }
