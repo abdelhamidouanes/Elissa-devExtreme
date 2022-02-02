@@ -36,7 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponentsDetailComponent } from './sous pages/products-components-detail/products-components-detail.component';
 import { DetailPopUpComponent } from './shared/components/detail-pop-up/detail-pop-up.component';
 import { ProductsComponentsVersionsDetailComponent } from './sous pages/products-components-versions-detail/products-components-versions-detail.component';
-import { DxAccordionModule, DxButtonModule, DxDataGridModule, DxPopupModule, DxScrollViewModule, DxTemplateModule,DxSelectBoxModule } from 'devextreme-angular';
+import { DxAccordionModule, DxButtonModule, DxDataGridModule, DxPopupModule, DxScrollViewModule, DxTemplateModule,DxSelectBoxModule, DxDateBoxModule,DxCalendarModule } from 'devextreme-angular';
 import { TestCaseRunDetailsComponent } from './sous pages/test-case-run-details/test-case-run-details.component';
 import { TestCaseRunSousDetailsComponent } from './sous pages/test-case-run-sous-details/test-case-run-sous-details.component';
 import { EditPopUpComponent } from './pages/edit-pop-up/edit-pop-up.component';
@@ -97,7 +97,9 @@ import { TestSessionDetailComponent } from './sous pages/test-session-detail/tes
     DxAccordionModule,
     DxScrollViewModule,
     DxSelectBoxModule,
-    DxListModule
+    DxListModule,
+    DxDateBoxModule,
+    DxCalendarModule 
   ],
   providers: [AuthService, ScreenService, AppInfoService],
   bootstrap: [AppComponent]

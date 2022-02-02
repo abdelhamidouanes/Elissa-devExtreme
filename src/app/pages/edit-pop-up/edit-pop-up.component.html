@@ -1,39 +1,91 @@
 <dx-popup
-[width]="600"
-[height]="300"
+width="600"
+height="auto"
 [showTitle]="true"
-title="Information"
+title="Update Session event"
 [dragEnabled]="false"
 [closeOnOutsideClick]="true"
 [showCloseButton]="false"
 container=".dx-viewport"
 [(visible)]="popupVisible"
-class="container"
 >
     <div class="container">
         <div class="containt">
             <div class="dx-field">
                 <div class="dx-field-label">Status</div>
                 <div class="dx-field-value">
-                <dx-select-box
-                    [dataSource]="status"
-                    displayExpr="Name"
-                    valueExpr="ID"
-                    
+                <dx-select-box 
+                #selectStatus
+                [items]="status"
+                  
                 ></dx-select-box>
+                </div>
+            </div>
+           
+            <div class="dx-field">
+                <div class="dx-field-label">Planning</div>
+                <div class="dx-field-value">
+                <dx-select-box              
+                #selectPlan
+                [items]="planning"
+            
+                ></dx-select-box>
+               
+            </div>           
+            </div>
+            <div class="dx-field" *ngIf="selectPlan.value == 'Fixed'">
+                <div class="dx-field-label">Date and Time</div>
+                <div class="dx-field-value">
+                  <dx-date-box             
+                    [value]="currentDate"
+                    displayFormat="dd-MM-yyyy HH:mm"
+                    type="datetime"
+                    [showClearButton]="true"
+                    [useMaskBehavior]="true"
+                  >
+                  
+                  </dx-date-box>
+                </div>
+            </div>
+            <div class="dx-field" *ngIf="selectPlan.value == 'Regular'">
+                <div class="dx-field-label">Time</div>
+                <div class="dx-field-value">
+                    <dx-date-box    
+                     [value]="now"
+                     displayFormat="HH:mm"
+                     type="datetime"
+                     [calendarOptions]="{visible:false}"
+                     [showClearButton]="true"
+                     [useMaskBehavior]="true"
+                   >
+                   
+                   </dx-date-box>
                 </div>
             </div>
         </div>
 
         <div class="buttons">
+            <dx-button 
+            stylingMode="contained"
+            text="Submit"
+            type="normal"
+            [width]="120"
+            (click)="onSubmit(selectStatus.value,selectPlan.value,currentDate,now)"
+            class="ComboButtons"
+            >
+            </dx-button>
+
             <dx-button
             stylingMode="contained"
             text="Close"
             type="normal"
             [width]="80"
             (click)="closePopUp()"
+            
             >
             </dx-button>
+            
+           
         </div>
     </div>
 </dx-popup>

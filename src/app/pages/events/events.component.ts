@@ -48,8 +48,10 @@ export class EventsComponent implements OnInit {
     this.seeDetailSubject.next({'page': 'events-session-detail', 'id': cell.data.ID_Session});
   }
   editPopup(cell:any):void{
-    this.popUpTitle='Update event';
-    this.updateEvent.next({'id':cell.data.ID});
+    /*this.popUpTitle='Update event';
+    this.updateEvent.next({'id':cell.data.ID});  */
+    this.popUpTitle = 'Event Details';
+    this.updateEvent.next({'page': 'events', 'id': cell.data.ID});
     
   }
   ngOnDestroy(): void {
