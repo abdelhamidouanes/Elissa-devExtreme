@@ -25,8 +25,8 @@ export class TestSessionService {
   }
 
 
-  async getTestSessions(): Promise<void>{
-    this.testSessions = await this.httpClient.get<any>(this.apiUrl+'testSession/read.php?idProd=0&Version=0&date=2021-01&ListStatus=1&from=table&index=0').toPromise();
+  async getTestSessions(date:any): Promise<void>{
+    this.testSessions = await this.httpClient.get<any>(this.apiUrl+'testSession/read.php?idProd=0&Version=0&date='+date+'&ListStatus=1&from=table&index=0').toPromise();
     this.emitTestSessions();
   }
 

@@ -11,6 +11,8 @@ export class TestSessionComponent implements OnInit {
   
   testSessions: any[];
   testSessionsSubscription: Subscription;
+  date: any = new Date (2021,1,1) 
+  value : any= new Date (2021,1,1) 
 
   constructor(private testSessionsService: TestSessionService) {
     this.testSessions = [];
@@ -18,7 +20,7 @@ export class TestSessionComponent implements OnInit {
    }
 
   async ngOnInit(): Promise<void> {
-    await this.testSessionsService.getTestSessions();
+    await this.testSessionsService.getTestSessions(this.date);
     this.testSessionsSubscription = this.testSessionsService.testSessionsSubject.subscribe((data: any) => {
       let counter = 0;
       for (let key in data) {
@@ -36,6 +38,22 @@ export class TestSessionComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.testSessionsSubscription.unsubscribe();
+  }
+
+  async onValueChanged(e : Date = new Date()) {
+    
+    this.date = this.value.getFullYear() +"-"+this.value.getMonth();
+    console.log(this.date);
+    await this.testSessionsService.getTestSessions(this.date);
+    this.testSessionsSubscription = this.testSessionsService.testSessionsSubject.subscribe(data => {
+      let counter = 0;
+      for (let key in data) {
+        if(data[key].ID_Session != null){
+          this.testSessions[counter]=data[key];
+          counter++;
+        }
+      }
+    });
   }
 
 }

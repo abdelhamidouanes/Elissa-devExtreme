@@ -1,5 +1,12 @@
 <h2 class="content-block">Test Sessions</h2>
+
 <div class="content-block">
+  <div class="dx-field">
+    <div class="dx-field-label">Date picker</div>
+    <div class="dx-field-value">
+      <dx-date-box  [value]="value" pickerType="rollers" displayFormat="MMMM  yyyy" (onValueChanged)="onValueChanged($event)"> </dx-date-box>
+    </div>
+  </div>
   <div class="dx-card responsive-paddings">
       <dx-data-grid
         id="gridContainer"
