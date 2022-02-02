@@ -21,7 +21,16 @@
 
         <dxi-column dataField="ID_Test" caption="Id"></dxi-column>
         <dxi-column dataField="Test_Name" caption="Name"></dxi-column>
-        <dxi-column dataField="Description" caption="Description"></dxi-column>
+        <dxi-column  caption="Description" cellTemplate="DescriptionTemplate">
+            <div *dxTemplate="let cell of 'DescriptionTemplate'" class ="DescriptionButton">
+              <dx-button
+                class="button-info"
+                text="Details"
+                (click)="onSeeDescriptionClick(cell)" >
+              </dx-button>
+            </div>  
+                     
+        </dxi-column>
         <dxi-column  caption="Version" cellTemplate="versionTemplate">
             <div *dxTemplate="let cell of 'versionTemplate'" >
                 {{cell.data.ID_Version==null?'All Versions':cell.data.ID_Version}}
@@ -37,5 +46,8 @@
         </dxi-column>
         
         </dx-data-grid>
+        
  </div>
+
 </div>
+<app-description-pop-up [event]="seeDescriptionSubject" [descriptionhtml]="currentDescription" title="Description"></app-description-pop-up> 
