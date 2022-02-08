@@ -40,6 +40,7 @@ import { TestSessionDetailComponent } from './sous pages/test-session-detail/tes
 import { HistoryComponent } from './pages/history/history.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AlertMsgComponent } from './shared/components/alert-msg/alert-msg.component';
+import { DetailPopUpSousDetailComponent } from './shared/components/detail-pop-up-sous-detail/detail-pop-up-sous-detail.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { AlertMsgComponent } from './shared/components/alert-msg/alert-msg.compo
     TestCaseRunSousDetailsComponent,
     TestSessionDetailComponent,
     HistoryComponent,
-    AlertMsgComponent
+    AlertMsgComponent,
+    DetailPopUpSousDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@
     --status-inProgress : #6aaaf3;
     --status-closed : #936af3;
     --status-draft : #e5f36a;
+    --status-delivered : #933c9e;
 }
 
 .action{
@@ -52,6 +53,7 @@
     touch-action: manipulation;
     vertical-align: middle;
     white-space: nowrap;
+    width: fit-content;
 }
 
 .status-open{
@@ -68,4 +70,8 @@
 
 .status-draft{
     background-color: var(--status-draft);
+}
+
+.status-delivered{
+    background-color: var(--status-delivered);
 }

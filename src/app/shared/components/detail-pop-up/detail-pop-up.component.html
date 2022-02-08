@@ -16,7 +16,18 @@
         <div class="containt">
             <div class="dx-field one-item" *ngFor="let item of details| keyvalue">
               <div class="dx-field-label">{{strRemplace(item.key)}}</div>
-              <div class="dx-field-value-static">{{item.value}}</div>
+              <div  *ngIf="typeOf(item.value) == 'string'"
+                    [ngClass]="{'dx-field-value-static': true,
+                                'status': isStatus(item.key),
+                                'status-open': (toUpperCase(item.value) == 'OPEN') && isStatus(item.key),
+                                'status-closed': (toUpperCase(item.value) == 'CLOSED') && isStatus(item.key),
+                                'status-inProgress': (toUpperCase(item.value) == 'IN PROGRESS') && isStatus(item.key),
+                                'status-draft': (toUpperCase(item.value) == 'DRAFT') && isStatus(item.key),
+                                'status-delivered': (toUpperCase(item.value) == 'DELIVERED') && isStatus(item.key)}">
+                {{item.value}}
+              </div>
+              <app-detail-pop-up-sous-detail class="dx-field-value-static" *ngIf="typeOf(item.value) == 'object'" [data]="item.value">
+              </app-detail-pop-up-sous-detail>
             </div>
         </div>
         <div class="buttons">

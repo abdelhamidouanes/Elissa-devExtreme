@@ -52,7 +52,32 @@ export class DetailPopUpComponent implements OnInit, OnDestroy {
   }
 
   strRemplace(s : any): string{
+    s= s.charAt(0).toUpperCase() + s.slice(1);
     return s.replaceAll('_', ' ');
+  }
+
+  isStatus(key: any): boolean{
+      if(key.toUpperCase().indexOf('STATUS') == 0){
+        return true;
+      }else{
+        return false;
+      }
+  }
+
+  toUpperCase(value: any): string{
+    if(value != null && typeof(value) == 'string' ){
+      return value.toUpperCase();
+    }else{
+      return '';
+    }
+  }
+
+  typeOf(value: any): any{
+    if( value != null){
+      return typeof(value);
+    }else{
+      return '';
+    }
   }
 
   getWidthPopUp(): any{
