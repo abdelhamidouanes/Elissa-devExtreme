@@ -1,6 +1,31 @@
 <h2 class="content-block">Update Profile</h2>
 <div class="content-block">
     <div class="dx-card responsive-paddings">
-        <p>test</p>
+        <div class="form" *ngIf="userInformation != null">
+            <div class="dx-fieldset">
+              <div class="dx-field">
+                <div class="dx-field-label">User Name</div>
+                <div class="dx-field-value">
+                  <dx-text-box [value]="userInformation.Login"></dx-text-box>
+                </div>
+              </div>
+              <div class="dx-field">
+                <div class="dx-field-label">Email address</div>
+                <div class="dx-field-value">
+                  <dx-text-box [value]="userInformation.email"></dx-text-box>
+                </div>
+              </div>
+            </div>
+            <div class="dx-fieldset right">
+              <dx-button
+                stylingMode="contained"
+                text="Update"
+                type="normal"
+                [width]="120"
+                (click)="updateProfile()"
+              >
+              </dx-button>
+            </div>
+        </div>
     </div>
 </div>

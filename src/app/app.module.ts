@@ -31,7 +31,7 @@ import { SettingsUsersComponent } from './pages/Settings/settings-users/settings
 import { SettingsAtboxComponent } from './pages/Settings/settings-atbox/settings-atbox.component';
 import { DetailPopUpComponent } from './shared/components/detail-pop-up/detail-pop-up.component';
 import { ProductsComponentsVersionsDetailComponent } from './sous pages/products-components-versions-detail/products-components-versions-detail.component';
-import { DxButtonModule, DxDataGridModule, DxLoadPanelModule, DxPopupModule } from 'devextreme-angular';
+import { DxButtonModule, DxDataGridModule, DxLoadPanelModule, DxPopupModule, DxTextBoxModule } from 'devextreme-angular';
 import { TestCaseRunDetailsComponent } from './sous pages/test-case-run-details/test-case-run-details.component';
 import { TestCaseRunSousDetailsComponent } from './sous pages/test-case-run-sous-details/test-case-run-sous-details.component';
 import { TestSessionDetailComponent } from './sous pages/test-session-detail/test-session-detail.component';
@@ -43,6 +43,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponentsDetailComponent } from './sous pages/products-components-detail/products-components-detail.component';
 import { DescriptionPopUpComponent } from './shared/components/description-pop-up/description-pop-up.component';
 import { DxAccordionModule, DxDateBoxModule, DxScrollViewModule, DxTemplateModule } from 'devextreme-angular';
+import { ChangepasswordComponent } from './pages/Settings/changepassword/changepassword.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { DxAccordionModule, DxDateBoxModule, DxScrollViewModule, DxTemplateModul
     HistoryComponent,
     AlertMsgComponent,
     DetailPopUpSousDetailComponent,
-    DescriptionPopUpComponent
+    DescriptionPopUpComponent,
+    ChangepasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +102,8 @@ import { DxAccordionModule, DxDateBoxModule, DxScrollViewModule, DxTemplateModul
     DxListModule,
     DxDateBoxModule,
     DxButtonModule,
-    DxScrollViewModule
+    DxScrollViewModule,
+    DxTextBoxModule
   ],
   providers: [AuthService, ScreenService, AppInfoService, CookieService],
   bootstrap: [AppComponent]

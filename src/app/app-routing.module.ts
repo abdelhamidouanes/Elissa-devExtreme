@@ -1,3 +1,4 @@
+import { ChangepasswordComponent } from './pages/Settings/changepassword/changepassword.component';
 import { TestSessionComponent } from './pages/Test Sessions/test-session/test-session.component';
 import { TestCasesComponent } from './pages/test-cases/test-cases.component';
 import { ProductsComponentsVersionsComponent } from './pages/Products Components/products-components-versions/products-components-versions.component';
@@ -144,6 +145,11 @@ const routes: Routes = [
   {
     path: 'settingsusers',
     component: SettingsUsersComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'changepassword',
+    component: ChangepasswordComponent,
     canActivate: [ AuthGuardService ]
   },
   {

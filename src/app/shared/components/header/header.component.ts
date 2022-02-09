@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
     text: 'Profile',
     icon: 'user',
     onClick: () => {
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/settingsusers']);
     }
   },
   {

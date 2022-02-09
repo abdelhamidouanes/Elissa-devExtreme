@@ -126,8 +126,12 @@ export let navigation = [
     isExpanded: false,
     items: [
       {
-        text: 'Users',
+        text: 'Profile',
         path: '/settingsusers'
+      },
+      {
+        text: 'Change Password',
+        path: '/changepassword'
       },
       {
         text: 'ATBox',
