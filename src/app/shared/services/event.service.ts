@@ -13,12 +13,10 @@ export class EventService {
 
   private events: any;
   eventsSubject : Subject<any>;
-  private event:any;
-  eventSubject : Subject<any>;
+  
   constructor(private httpClient: HttpClient) {
     this.events=[];
     this.eventsSubject=new Subject<any>();
-    this.eventSubject=new Subject<any>();
   }
 
   emitEvents(): void{
@@ -29,6 +27,7 @@ export class EventService {
     this.events = await this.httpClient.get<any>(this.apiUrl+'events/read.php?Status=1&idProd=0&Version=0').toPromise();
     this.emitEvents();
   }
+  
   editEvent(id:any,session_id:any,status:any,planning:any,event_date:any){
     let httpBody = new FormData();
     httpBody.append('ID',id);
