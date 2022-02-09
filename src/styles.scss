@@ -8,7 +8,9 @@
     --status-cancelled : #f77a5b;
     --status-readytouse : #275d52;
 }
-
+.dx-dateviewroller-day {
+    display: none;
+  }
 .action{
     display: flex;
     justify-content: center;

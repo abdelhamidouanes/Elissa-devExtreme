@@ -19,12 +19,19 @@ export class ProductsComponentsVersionsService {
   private components: Map<string,any>;
   componentsSubject : Subject<Map<string,any>>;
 
+  
+  private versions: any;
+  versionsSubject : Subject<any>;
+
   constructor(private httpClient: HttpClient, private authService: AuthService, private loadingService: LoadingService, private alertMsgService: AlertMsgService) {
     this.products = [];
     this.productsSubject = new Subject<any>();
 
     this.components = new Map<string,any>();
     this.componentsSubject = new Subject<Map<string,any>>();
+
+    this.versions = [];
+    this.versionsSubject = new Subject<any>();
   }
 
   emitProducts(): void{
@@ -35,6 +42,9 @@ export class ProductsComponentsVersionsService {
     this.componentsSubject.next(this.components);
   }
 
+  emitVersions(): void{
+    this.versionsSubject.next(this.versions);
+  }
   async getProducts(): Promise<void>{
     this.loadingService.afficherDisplayLoading();
     try {
@@ -57,6 +67,21 @@ export class ProductsComponentsVersionsService {
         const components = await this.httpClient.get<any>(this.apiUrl+'product/read_Component_version.php?IdProd='+parentData.ID_Product+'&Version='+parentData.Version+'&patch='+parentData.patch).toPromise();
         this.components.set(parentData.ID_Product+parentData.Version+parentData.patch, components);
         this.emitComponents();
+      }
+    } catch (error) {
+      this.alertMsgService.setTitle('Erreur connexion.');
+      this.alertMsgService.setMsg('Une erreur s\'est produite lors de chargement des données');
+      this.alertMsgService.afficherDisplayAlertMsg();
+    }
+    this.loadingService.cacherDisplayLoading();
+  }
+  
+  async getVersions(idProduct:any): Promise<void>{
+    this.loadingService.afficherDisplayLoading();
+    try {
+      if(await this.authService.verifyApiKey()){
+        this.versions = await this.httpClient.get<any>(this.apiUrl+'version/read_VersionOnly.php?IdProd=' +idProduct+'&index=false').toPromise();
+        this.emitVersions();
       }
     } catch (error) {
       this.alertMsgService.setTitle('Erreur connexion.');
