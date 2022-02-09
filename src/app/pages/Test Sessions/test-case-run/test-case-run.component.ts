@@ -30,7 +30,8 @@ export class TestCaseRunComponent implements OnInit , OnDestroy{
     this.date = this.value.getFullYear() +"-"+month;
     await this.testCaseRunService.getTestCaseRun(this.date);
     this.testCaseRunSubscription = this.testCaseRunService.testCaseRunSubject.subscribe(data => {
-      let counter = 0;
+      let counter = 0
+      this.testCaseRun=[]
       for (let key in data) {
         if(data[key].ID_Session != null){
           this.testCaseRun[counter]=data[key];
@@ -45,17 +46,6 @@ export class TestCaseRunComponent implements OnInit , OnDestroy{
     let month =  parseInt(this.value.getMonth()) +1 
     this.date = this.value.getFullYear() +"-"+ month;
     await this.testCaseRunService.getTestCaseRun(this.date);
-    this.testCaseRunSubscription = this.testCaseRunService.testCaseRunSubject.subscribe(data => {
-      let counter = 0;
-      for (let key in data) {
-        if(data[key].ID_Session != null){
-          this.testCaseRun[counter]=data[key];
-          counter++;
-        }
-      }
-     
-    });
-    this.testCaseRunService.emittestCaseRun();
   } 
   
  
