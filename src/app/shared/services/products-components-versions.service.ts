@@ -55,7 +55,6 @@ export class ProductsComponentsVersionsService {
   
   async getVersions(idProduct:any): Promise<void>{
     this.versions = await this.httpClient.get<any>(this.apiUrl+'version/read_VersionOnly.php?IdProd=' +idProduct+'&index=false').toPromise();
-    console.log(this.versions)
     this.emitVersions();
   }
 
