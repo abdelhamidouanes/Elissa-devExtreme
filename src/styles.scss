@@ -5,7 +5,9 @@
     --status-closed : #936af3;
     --status-draft : #e5f36a;
 }
-
+.dx-dateviewroller-day {
+    display: none;
+  }
 .action{
     display: flex;
     justify-content: center;
