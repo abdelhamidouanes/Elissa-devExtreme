@@ -13,9 +13,11 @@ export class TestCaseRunComponent implements OnInit , OnDestroy{
   testCaseRun: any[];
   testCaseRunSubscription: Subscription; 
 
+  currentDate : any = new Date () ;
 
+  dateBoxValue : any= new Date (this.currentDate.getFullYear() -1, this.currentDate.getMonth(), 1 ) ;
+  dateApi : any ;
   
-
   constructor(private testCaseRunService: TestCaseRunService) {
     this.testCaseRun = [];
     this.testCaseRunSubscription = new Subscription();
@@ -26,17 +28,27 @@ export class TestCaseRunComponent implements OnInit , OnDestroy{
   }
 
   async ngOnInit(): Promise<void> {
-   await this.testCaseRunService.getTestCaseRun();
+    let month =parseInt(this.dateBoxValue.getMonth()) +1
+    this.dateApi = this.dateBoxValue.getFullYear() +"-"+month;
+    await this.testCaseRunService.getTestCaseRun(this.dateApi);
+
     this.testCaseRunSubscription = this.testCaseRunService.testCaseRunSubject.subscribe(data => {
-      let counter = 0;
-      for (let key in data) {
-        if(data[key].ID_Session != null){
-          this.testCaseRun[counter]=data[key];
-          counter++;
-        }
+      if(data.numberrows == 0){
+        this.testCaseRun = [];
+      }else{
+        this.testCaseRun = Object.values(data);
       }
     });
     this.testCaseRunService.emittestCaseRun();
   }
 
+  async onValueChanged(e : any = new Date()) {
+    let month =  parseInt(this.dateBoxValue.getMonth()) +1 
+    this.dateApi = this.dateBoxValue.getFullYear() +"-"+ month;
+
+    await this.testCaseRunService.getTestCaseRun(this.dateApi);
+  } 
+  
+ 
+  
 }
