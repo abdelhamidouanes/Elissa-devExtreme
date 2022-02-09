@@ -5,6 +5,7 @@
     --status-closed : #936af3;
     --status-draft : #e5f36a;
     --status-delivered : #933c9e;
+    --status-cancelled : #f77a5b;
 }
 
 .action{
@@ -74,4 +75,8 @@
 
 .status-delivered{
     background-color: var(--status-delivered);
+}
+
+.status-cancelled{
+    background-color: var(--status-cancelled);
 }
