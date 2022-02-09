@@ -13,9 +13,11 @@ export class TestCasesComponent implements OnInit {
   testCasesSubscription: Subscription;
 
   seeDetailSubject: Subject<any> = new Subject<any>();
+
+  currentDescription : any;
+  seeDescriptionSubject: Subject<any> = new Subject<any>();
   
   constructor(private testCaseService: TestCaseService) {
-
     this.testCases = [];
     this.testCasesSubscription = new Subscription();
   }
@@ -29,6 +31,12 @@ export class TestCasesComponent implements OnInit {
 
     this.testCaseService.emitTestCases();
   }
+
+  onSeeDescriptionClick(cell: any) {
+    this.currentDescription = cell.data.Description;
+    this.seeDescriptionSubject.next();
+  }
+
 
   ngOnDestroy(): void {
     this.testCasesSubscription.unsubscribe();

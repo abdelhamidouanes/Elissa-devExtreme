@@ -29,11 +29,9 @@ import { DeliveryComponent } from './pages/delivery/delivery.component';
 import { EventsComponent } from './pages/events/events.component';
 import { SettingsUsersComponent } from './pages/Settings/settings-users/settings-users.component';
 import { SettingsAtboxComponent } from './pages/Settings/settings-atbox/settings-atbox.component';
-import { HttpClientModule } from '@angular/common/http';
-import { ProductsComponentsDetailComponent } from './sous pages/products-components-detail/products-components-detail.component';
 import { DetailPopUpComponent } from './shared/components/detail-pop-up/detail-pop-up.component';
 import { ProductsComponentsVersionsDetailComponent } from './sous pages/products-components-versions-detail/products-components-versions-detail.component';
-import { DxAccordionModule, DxButtonModule, DxDataGridModule, DxDateBoxModule, DxLoadPanelModule, DxPopupModule, DxScrollViewModule, DxTemplateModule } from 'devextreme-angular';
+import { DxButtonModule, DxDataGridModule, DxLoadPanelModule, DxPopupModule } from 'devextreme-angular';
 import { TestCaseRunDetailsComponent } from './sous pages/test-case-run-details/test-case-run-details.component';
 import { TestCaseRunSousDetailsComponent } from './sous pages/test-case-run-sous-details/test-case-run-sous-details.component';
 import { TestSessionDetailComponent } from './sous pages/test-session-detail/test-session-detail.component';
@@ -41,6 +39,10 @@ import { HistoryComponent } from './pages/history/history.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AlertMsgComponent } from './shared/components/alert-msg/alert-msg.component';
 import { DetailPopUpSousDetailComponent } from './shared/components/detail-pop-up-sous-detail/detail-pop-up-sous-detail.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductsComponentsDetailComponent } from './sous pages/products-components-detail/products-components-detail.component';
+import { DescriptionPopUpComponent } from './shared/components/description-pop-up/description-pop-up.component';
+import { DxAccordionModule, DxDateBoxModule, DxScrollViewModule, DxTemplateModule } from 'devextreme-angular';
 
 
 @NgModule({
@@ -75,7 +77,8 @@ import { DetailPopUpSousDetailComponent } from './shared/components/detail-pop-u
     TestSessionDetailComponent,
     HistoryComponent,
     AlertMsgComponent,
-    DetailPopUpSousDetailComponent
+    DetailPopUpSousDetailComponent,
+    DescriptionPopUpComponent
   ],
   imports: [
     BrowserModule,
@@ -92,12 +95,12 @@ import { DetailPopUpSousDetailComponent } from './shared/components/detail-pop-u
     HttpClientModule,
     DxDataGridModule,
     DxPopupModule,
-    DxButtonModule,
     DxTemplateModule,
     DxAccordionModule,
-    DxScrollViewModule,
     DxListModule,
-    DxDateBoxModule
+    DxDateBoxModule,
+    DxButtonModule,
+    DxScrollViewModule
   ],
   providers: [AuthService, ScreenService, AppInfoService, CookieService],
   bootstrap: [AppComponent]

@@ -1,0 +1,31 @@
+
+<dx-popup
+    width="auto"
+    height="auto"
+    [showTitle]="true"
+    [title]="title"
+    [dragEnabled]="false"
+    [closeOnOutsideClick]="true"
+    [showCloseButton]="false"
+    container=".dx-viewport"
+    [(visible)]="popupVisible"
+    class="container"
+>
+    <dx-scroll-view width="100%" height="100%">
+      <div class="container">
+        <div class="containt">       
+            <div [innerHTML]="descriptionhtml"></div>
+        </div>
+        <div class="buttons">
+          <dx-button
+            stylingMode="contained"
+            text="Close"
+            type="normal"
+            [width]="80"
+            (click)="closePopUp()"
+          >
+          </dx-button>
+        </div>
+      </div>
+    </dx-scroll-view>  
+</dx-popup>
