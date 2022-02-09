@@ -13,8 +13,9 @@ export class TestSessionComponent implements OnInit {
   testSessionsSubscription: Subscription;
 
   currentDate : any = new Date () ;
-  value : any = new Date (this.currentDate.getFullYear() -1, this.currentDate.getMonth(), 1 ) ;
-  date: any ;
+
+  dateBoxValue : any = new Date (this.currentDate.getFullYear() -1, this.currentDate.getMonth(), 1 ) ;
+  dateApi: any ;
   
 
   seeDetailSubject: Subject<any> = new Subject<any>();
@@ -25,18 +26,19 @@ export class TestSessionComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    let month = parseInt (this.value.getMonth()) +1
-    this.date = this.value.getFullYear()+"-"+ month;
-    console.log("date ", this.date )
-    await this.testSessionsService.getTestSessions(this.date);
+    let month = parseInt (this.dateBoxValue.getMonth()) +1
+    this.dateApi = this.dateBoxValue.getFullYear()+"-"+ month;
+
+    await this.testSessionsService.getTestSessions(this.dateApi);
     this.testSessionsSubscription = this.testSessionsService.testSessionsSubject.subscribe((data: any) => {
-      let counter = 0;
-      for (let key in data) {
-        this.testSessions[counter]=data[key];
-        counter++;
+      if(data.Status != null){
+        this.testSessions = [];
+      }else{
+        this.testSessions = Object.values(data);
       }
     });
     this.testSessionsService.emitTestSessions();
+
   }
 
 
@@ -50,19 +52,11 @@ export class TestSessionComponent implements OnInit {
 
   async onValueChanged(e : Date = new Date()) {
     
-    let month =  parseInt(this.value.getMonth()) +1; 
-    this.date = this.value.getFullYear() +"-"+ month;
-    console.log(" date change ", this.date+"  "+ this.value)
-    await this.testSessionsService.getTestSessions(this.date);
-    this.testSessionsSubscription = this.testSessionsService.testSessionsSubject.subscribe(data => {
-      let counter = 0;
-      for (let key in data) {
-        if(data[key].ID_Session != null){
-          this.testSessions[counter]=data[key];
-          counter++;
-        }
-      }
-    });
+    let month =  parseInt(this.dateBoxValue.getMonth()) +1; 
+    this.dateApi = this.dateBoxValue.getFullYear() +"-"+ month;
+    
+    await this.testSessionsService.getTestSessions(this.dateApi);
+
   }
 
 }
