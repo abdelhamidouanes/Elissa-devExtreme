@@ -17,7 +17,15 @@ export class DescriptionPopUpComponent implements OnInit {
 
   popupVisible = false;
 
+
+  
+  windowWidth : number; 
+  windowHeight : number;
+
+
   constructor() { 
+    this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
     this.eventSubscription = new Subscription();
   }
 
@@ -35,6 +43,22 @@ export class DescriptionPopUpComponent implements OnInit {
 
   closePopUp(): void{
     this.popupVisible = false;
+  }
+
+
+  
+  getWidthPopUp(): any{
+    return this.windowWidth * 0.8;
+  }
+
+  getHeightPopUp(): any{
+    return this.windowHeight * 0.8;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResizeWindow(event: any) {
+     this.windowWidth = window.innerWidth;
+     this.windowHeight = window.innerHeight;
   }
 
 }

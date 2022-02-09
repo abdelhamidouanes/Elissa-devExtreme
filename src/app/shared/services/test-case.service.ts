@@ -28,7 +28,7 @@ export class TestCaseService {
     this.loadingService.afficherDisplayLoading();
     try {
       if(await this.authService.verifyApiKey()){
-        this.testCases = await this.httpClient.get<any>(this.apiUrl+'test/read.php?IdProd=31&Version=0&Status=1&index=0').toPromise();
+        this.testCases = await this.httpClient.get<any>(this.apiUrl+'test/read.php?IdProd=0&Version=0&Status=1&index=0').toPromise();
         this.emitTestCases();
       }
     } catch (error) {

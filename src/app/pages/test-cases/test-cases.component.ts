@@ -16,6 +16,8 @@ export class TestCasesComponent implements OnInit {
 
   currentDescription : any;
   seeDescriptionSubject: Subject<any> = new Subject<any>();
+
+  popUpTitle = '';
   
   constructor(private testCaseService: TestCaseService) {
     this.testCases = [];
@@ -43,7 +45,24 @@ export class TestCasesComponent implements OnInit {
   }
 
   onSeeDetailClick(cell: any): void {
+    this.popUpTitle = 'Test Case Details'
     this.seeDetailSubject.next({'page': 'test-cases', 'id': cell.data.ID_Test});
   }
+
+  onSeeDetailProductClick(cell: any){
+    this.popUpTitle = 'Product Details'
+    this.seeDetailSubject.next({'page': 'test-cases-product-detail', 'id': cell.data.ID_Product});
+  }
+
+  
+  toUpperCase(value: any): string{
+    if(value != null && typeof(value) == 'string' ){
+      return value.toUpperCase();
+    }else{
+      return '';
+    }
+  }
+
+  
 
 }

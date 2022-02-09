@@ -6,6 +6,7 @@
     --status-draft : #e5f36a;
     --status-delivered : #933c9e;
     --status-cancelled : #f77a5b;
+    --status-readytouse : #275d52;
 }
 
 .action{
@@ -81,10 +82,21 @@
     background-color: var(--status-cancelled);
 }
 
+.status-readytouse{
+    background-color: var(--status-readytouse);
+}
+
 .dx-field-label{
     font-size: 15px;
 }
 
 .dx-dateviewroller-day {
     display: none;
+}
+
+.ProductColumn{
+    text-decoration-line: underline;
+    color: var(--theme-color);
+    cursor: pointer;
+    justify-content: center;
 }

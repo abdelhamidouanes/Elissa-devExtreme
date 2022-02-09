@@ -31,12 +31,30 @@
             </div>  
                      
         </dxi-column>
+        <dxi-column dataField="Name_Product" caption="Product" cellTemplate="cellProduct">
+            <div *dxTemplate="let cell of 'cellProduct'">
+              <em class="ProductColumn" (click)=onSeeDetailProductClick(cell)>{{cell.text}}</em>
+            </div>
+        </dxi-column>
         <dxi-column  caption="Version" cellTemplate="versionTemplate">
             <div *dxTemplate="let cell of 'versionTemplate'" >
                 {{cell.data.ID_Version==null?'All Versions':cell.data.ID_Version}}
             </div>                
         </dxi-column>
-        <dxi-column dataField="Status_PQ" caption="Status PQ"></dxi-column>
+        <dxi-column  caption="Status PQ" cellTemplate="statusPQ">
+            <div *dxTemplate="let cell of 'statusPQ'" >
+                <div [ngClass]="{'status': true,
+                    'status-open': (toUpperCase(cell.data.Status_PQ) == 'OPEN'),
+                    'status-closed': (toUpperCase(cell.data.Status_PQ) == 'CLOSED'),
+                    'status-inProgress': (toUpperCase(cell.data.Status_PQ) == 'IN PROGRESS'),
+                    'status-draft': (toUpperCase(cell.data.Status_PQ) == 'DRAFT'),
+                    'status-delivered': (toUpperCase(cell.data.Status_PQ) == 'DELIVERED'),
+                    'status-cancelled': (toUpperCase(cell.data.Status_PQ) == 'CANCELLED'),
+                    'status-readytouse': (toUpperCase(cell.data.Status_PQ) == 'READY TO USE')}">
+                    {{cell.data.Status_PQ}}
+                </div>
+            </div>
+        </dxi-column>
         <dxi-column dataField="Test_type" caption="Test Type"></dxi-column>
         <dxi-column dataField="IdPQ" caption="ID PQ"></dxi-column>
         <dxi-column  caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
@@ -49,5 +67,5 @@
         
  </div>
 </div>
-<app-detail-pop-up [event]="seeDetailSubject" title="Test Case Details"></app-detail-pop-up>
+<app-detail-pop-up [event]="seeDetailSubject" [title]="popUpTitle"></app-detail-pop-up>
 <app-description-pop-up [event]="seeDescriptionSubject" [descriptionhtml]="currentDescription" title="Description"></app-description-pop-up> 

@@ -1,7 +1,8 @@
 
 <dx-popup
-    width="auto"
+    [width]="getWidthPopUp()"
     height="auto"
+    [maxHeight]="getHeightPopUp()"
     [showTitle]="true"
     [title]="title"
     [dragEnabled]="false"
