@@ -29,8 +29,16 @@
         <dxi-column dataField="DeliveryProductState" caption="Delivery Product State"></dxi-column>
         <dxi-column dataField="Created_date" caption="Created Date"></dxi-column>
         <dxi-column dataField="Created_by" caption="Created by"></dxi-column>
-        <dxi-column dataField="Comments" caption="Comments"></dxi-column>
-
+        <dxi-column cellTemplate="CommentsTemplate" caption="Comments">
+            <div *dxTemplate="let cell of 'CommentsTemplate'">
+                <dx-button
+                  class="button-info"
+                  text="Details"
+                  (click)="onSeeDescriptionClick(cell)" >
+                </dx-button>
+            </div> 
+        </dxi-column>
+        
         <dxi-column  caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
             <div *dxTemplate="let cell of 'cellTemplate'" class="action">
                 <em class="fas fa-eye" (click)="onSeeDetailClick(cell)"></em>
@@ -40,3 +48,4 @@
     </div>
 </div>
 <app-detail-pop-up [event]="seeDetailSubject" title="Delivery Details"></app-detail-pop-up>
+<app-description-pop-up [event]="seeDescriptionSubject" [descriptionhtml]="currentDescription" title="Description"></app-description-pop-up> 

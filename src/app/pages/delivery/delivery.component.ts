@@ -13,6 +13,9 @@ export class DeliveryComponent implements OnInit {
   deliverysSubscription: Subscription;
 
   seeDetailSubject: Subject<any> = new Subject<any>();
+
+  currentDescription : any;
+  seeDescriptionSubject: Subject<any> = new Subject<any>();
   
   constructor(private deliveryService: DeliveryService) { 
     this.deliverysSubscription = new Subscription();
@@ -30,6 +33,11 @@ export class DeliveryComponent implements OnInit {
   
   onSeeDetailClick(cell: any): void {
     this.seeDetailSubject.next({'page': 'delivery', 'id': cell.data.ID_delivery});
+  }
+
+  onSeeDescriptionClick(cell: any) {
+    this.currentDescription = cell.data.Comments;
+    this.seeDescriptionSubject.next();
   }
 
 }

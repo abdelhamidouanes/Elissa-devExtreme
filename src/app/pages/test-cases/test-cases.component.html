@@ -21,21 +21,23 @@
 
         <dxi-column dataField="ID_Test" caption="Id"></dxi-column>
         <dxi-column dataField="Test_Name" caption="Name"></dxi-column>
+
         <dxi-column  caption="Description" cellTemplate="DescriptionTemplate">
-            <div *dxTemplate="let cell of 'DescriptionTemplate'" class ="DescriptionButton">
+            <div *dxTemplate="let cell of 'DescriptionTemplate'">
               <dx-button
                 class="button-info"
                 text="Details"
                 (click)="onSeeDescriptionClick(cell)" >
               </dx-button>
-            </div>  
-                     
+            </div>        
         </dxi-column>
+
         <dxi-column dataField="Name_Product" caption="Product" cellTemplate="cellProduct">
             <div *dxTemplate="let cell of 'cellProduct'">
               <em class="ProductColumn" (click)=onSeeDetailProductClick(cell)>{{cell.text}}</em>
             </div>
         </dxi-column>
+
         <dxi-column  caption="Version" cellTemplate="versionTemplate">
             <div *dxTemplate="let cell of 'versionTemplate'" >
                 {{cell.data.ID_Version==null?'All Versions':cell.data.ID_Version}}
