@@ -93,8 +93,8 @@ export class DetailPopUpService {
         }
       }
     } catch (error) {
-      this.alertMsgService.setTitle('Erreur connexion.');
-      this.alertMsgService.setMsg('Une erreur s\'est produite lors de chargement des données');
+      this.alertMsgService.setTitle('Connection error.');
+      this.alertMsgService.setMsg('An error occurred while loading data.');
       this.alertMsgService.afficherDisplayAlertMsg();
     }
     this.loadingService.cacherDisplayLoading();

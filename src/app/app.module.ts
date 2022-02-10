@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { SideNavOuterToolbarModule, SideNavInnerToolbarModule, SingleCardModule } from './layouts';
-import { FooterModule, ResetPasswordFormModule, CreateAccountFormModule, ChangePasswordFormModule, LoginFormModule } from './shared/components';
+import { FooterModule, LoginFormModule } from './shared/components';
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
@@ -31,7 +31,7 @@ import { SettingsUsersComponent } from './pages/Settings/settings-users/settings
 import { SettingsAtboxComponent } from './pages/Settings/settings-atbox/settings-atbox.component';
 import { DetailPopUpComponent } from './shared/components/detail-pop-up/detail-pop-up.component';
 import { ProductsComponentsVersionsDetailComponent } from './sous pages/products-components-versions-detail/products-components-versions-detail.component';
-import { DxButtonModule, DxChartModule, DxDataGridModule, DxFormModule, DxLoadPanelModule, DxPopupModule, DxSelectBoxModule, DxTextBoxModule } from 'devextreme-angular';
+import { DxButtonModule, DxChartModule, DxDataGridModule, DxFormModule, DxLoadPanelModule, DxPopupModule, DxSelectBoxModule, DxTextBoxModule, DxValidationSummaryModule, DxValidatorModule } from 'devextreme-angular';
 import { TestCaseRunDetailsComponent } from './sous pages/test-case-run-details/test-case-run-details.component';
 import { TestCaseRunSousDetailsComponent } from './sous pages/test-case-run-sous-details/test-case-run-sous-details.component';
 import { TestSessionDetailComponent } from './sous pages/test-session-detail/test-session-detail.component';
@@ -88,9 +88,6 @@ import { ChangepasswordComponent } from './pages/Settings/changepassword/changep
     SideNavInnerToolbarModule,
     SingleCardModule,
     FooterModule,
-    ResetPasswordFormModule,
-    CreateAccountFormModule,
-    ChangePasswordFormModule,
     LoginFormModule,
     UnauthenticatedContentModule,
     AppRoutingModule,
@@ -106,7 +103,9 @@ import { ChangepasswordComponent } from './pages/Settings/changepassword/changep
     DxDateBoxModule,
     DxChartModule,
     DxFormModule,
-    DxSelectBoxModule
+    DxSelectBoxModule,
+    DxValidatorModule,
+    DxValidationSummaryModule
   ],
   providers: [AuthService, ScreenService, AppInfoService, CookieService],
   bootstrap: [AppComponent]

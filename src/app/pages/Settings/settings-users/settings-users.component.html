@@ -1,28 +1,49 @@
 <h2 class="content-block">Update Profile</h2>
 <div class="content-block">
     <div class="dx-card responsive-paddings">
-        <div class="form" *ngIf="userInformation != null">
+        <div *ngIf="(login != null) && (email != null)">
             <div class="dx-fieldset">
               <div class="dx-field">
                 <div class="dx-field-label">User Name</div>
                 <div class="dx-field-value">
-                  <dx-text-box [value]="userInformation.Login"></dx-text-box>
+                  <dx-text-box [(value)]="login">
+                    <dx-validator #loginValidator>
+                      <dxi-validation-rule
+                          type="required"
+                          message="Login is required"
+                        ></dxi-validation-rule>
+                      </dx-validator>
+                  </dx-text-box>
                 </div>
               </div>
               <div class="dx-field">
                 <div class="dx-field-label">Email address</div>
                 <div class="dx-field-value">
-                  <dx-text-box [value]="userInformation.email"></dx-text-box>
+                  <dx-text-box [(value)]="email">
+                    <dx-validator #emailValidator>
+                      <dxi-validation-rule
+                        type="required"
+                        message="Email is required"
+                      ></dxi-validation-rule>
+                      <dxi-validation-rule
+                        type="email"
+                        message="Email is invalid"
+                      ></dxi-validation-rule>
+                    </dx-validator>
+                  </dx-text-box>
                 </div>
               </div>
             </div>
             <div class="dx-fieldset right">
+              <dx-validation-summary class="validation-summury"></dx-validation-summary>
+          
               <dx-button
                 stylingMode="contained"
                 text="Update"
                 type="normal"
                 [width]="120"
                 (click)="updateProfile()"
+                [useSubmitBehavior]="true"
               >
               </dx-button>
             </div>

@@ -65,8 +65,9 @@ export class AuthService {
         this.cookieService.set('Login', keyVerification.Login);
         this.cookieService.set('Email', keyVerification.email);
         this.cookieService.set('Apikey', keyVerification.Apikey);
+        this.cookieService.set('Id', userData.Id);
         this._user = {
-                      email: keyVerification.email,
+                      email: keyVerification.Login,
                       avatarUrl: './assets/img/userAvatar.png'
                      };
         this.router.navigate([this._lastAuthenticatedPath]);
@@ -99,7 +100,7 @@ export class AuthService {
       let keyVerification = await this.httpClient.post<any>(this.apiUrl+'admin/verify_apikey.php', httpBody).toPromise();
       if(keyVerification.status == 'valid'){
         this._user = {
-          email: keyVerification.email,
+          email: keyVerification.Login,
           avatarUrl: './assets/img/userAvatar.png'
         };
         return {
@@ -179,6 +180,7 @@ export class AuthService {
     this.cookieService.delete('Email');
     this.cookieService.delete('Apikey');
     this.cookieService.delete('Login');
+    this.cookieService.delete('Id');
     this.router.navigate(['/login-form']);
   }
 }
