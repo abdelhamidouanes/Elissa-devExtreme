@@ -31,9 +31,10 @@ import { SettingsUsersComponent } from './pages/Settings/settings-users/settings
 import { SettingsAtboxComponent } from './pages/Settings/settings-atbox/settings-atbox.component';
 import { DetailPopUpComponent } from './shared/components/detail-pop-up/detail-pop-up.component';
 import { ProductsComponentsVersionsDetailComponent } from './sous pages/products-components-versions-detail/products-components-versions-detail.component';
-import { DxButtonModule, DxChartModule, DxDataGridModule, DxFormModule, DxLoadPanelModule, DxPopupModule, DxSelectBoxModule, DxTextBoxModule, DxValidationSummaryModule, DxValidatorModule } from 'devextreme-angular';
+import { DxButtonModule, DxCalendarModule, DxChartModule, DxDataGridModule, DxFormModule, DxLoadPanelModule, DxPopupModule, DxSelectBoxModule, DxTextBoxModule, DxValidationSummaryModule, DxValidatorModule } from 'devextreme-angular';
 import { TestCaseRunDetailsComponent } from './sous pages/test-case-run-details/test-case-run-details.component';
 import { TestCaseRunSousDetailsComponent } from './sous pages/test-case-run-sous-details/test-case-run-sous-details.component';
+import { EditPopUpComponent } from './pages/edit-pop-up/edit-pop-up.component';
 import { TestSessionDetailComponent } from './sous pages/test-session-detail/test-session-detail.component';
 import { HistoryComponent } from './pages/history/history.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -80,7 +81,8 @@ import { ChangepasswordComponent } from './pages/Settings/changepassword/changep
     AlertMsgComponent,
     DetailPopUpSousDetailComponent,
     DescriptionPopUpComponent,
-    ChangepasswordComponent
+    ChangepasswordComponent,
+    EditPopUpComponent
   ],
   imports: [
     BrowserModule,
@@ -99,13 +101,14 @@ import { ChangepasswordComponent } from './pages/Settings/changepassword/changep
     DxButtonModule,
     DxScrollViewModule,
     DxTextBoxModule,
-    DxListModule,
-    DxDateBoxModule,
     DxChartModule,
     DxFormModule,
-    DxSelectBoxModule,
     DxValidatorModule,
-    DxValidationSummaryModule
+    DxValidationSummaryModule,
+    DxSelectBoxModule,
+    DxListModule,
+    DxDateBoxModule,
+    DxCalendarModule 
   ],
   providers: [AuthService, ScreenService, AppInfoService, CookieService],
   bootstrap: [AppComponent]
