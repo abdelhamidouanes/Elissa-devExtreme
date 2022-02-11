@@ -1,4 +1,4 @@
-import { Component, NgModule, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, NgModule, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AuthService, IUser } from '../../services';
@@ -7,13 +7,14 @@ import { DxButtonModule } from 'devextreme-angular/ui/button';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-header',
   templateUrl: 'header.component.html',
   styleUrls: ['./header.component.scss']
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   @Output()
   menuToggle = new EventEmitter<boolean>();
 
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit {
   title!: string;
 
   user: IUser | null = { email: '' };
+  userSubscription : Subscription;
 
   userMenuItems = [{
     text: 'Profile',
@@ -40,10 +42,19 @@ export class HeaderComponent implements OnInit {
     }
   }];
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { 
+    this.userSubscription = new Subscription();
+  }
 
   ngOnInit() {
-    this.authService.getUser().then((e) => this.user = e.data);
+    this.userSubscription = this.authService.userSubject.subscribe(data =>{
+      this.user = data;
+    });
+    this.authService.emitUser();
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
 
   toggleMenu = () => {

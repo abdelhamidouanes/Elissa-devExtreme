@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Subject } from 'rxjs';
 
 export interface IUser {
   email: string;
@@ -15,6 +16,8 @@ const defaultPath = '/';
 export class AuthService {
 
   private _user: any;
+  userSubject : Subject<any>
+
   apiUrl = environment.apiUrl;
 
   get loggedIn(): boolean {
@@ -25,8 +28,14 @@ export class AuthService {
   set lastAuthenticatedPath(value: string) {
     this._lastAuthenticatedPath = value;
   }
-  constructor(private router: Router, private httpClient: HttpClient, private cookieService: CookieService) { }
+  constructor(private router: Router, private httpClient: HttpClient, private cookieService: CookieService) { 
+    this.userSubject = new Subject<any>();
+  }
 
+
+  emitUser(): void{
+    this.userSubject.next(this._user);
+  }
 
   async verifyApiKey(){
     try {
@@ -35,7 +44,12 @@ export class AuthService {
       let keyVerification = await this.httpClient.post<any>(this.apiUrl+'admin/verify_apikey.php', httpBody).toPromise();
   
       if(keyVerification.status == 'valid'){
-       return true;
+        this._user = {
+          email: keyVerification.Login,
+          avatarUrl: './assets/img/userAvatar.png'
+         };
+        this.emitUser();
+        return true;
       }
       else{
         this.logOut();
@@ -70,6 +84,7 @@ export class AuthService {
                       email: keyVerification.Login,
                       avatarUrl: './assets/img/userAvatar.png'
                      };
+        this.emitUser();
         this.router.navigate([this._lastAuthenticatedPath]);
   
         return {
@@ -177,6 +192,7 @@ export class AuthService {
 
   async logOut() {
     this._user = null;
+    this.emitUser();
     this.cookieService.delete('Email');
     this.cookieService.delete('Apikey');
     this.cookieService.delete('Login');

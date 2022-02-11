@@ -41,7 +41,7 @@ export class SettingUserService {
     this.loadingService.cacherDisplayLoading();
   }
 
-  async updateProfile(login: any, email: any): Promise<void>{
+  async updateProfile(login: any, email: any): Promise<boolean>{
     this.loadingService.afficherDisplayLoading();
     try {
       if(await this.authService.verifyApiKey()){
@@ -54,13 +54,20 @@ export class SettingUserService {
         this.alertMsgService.setTitle('Profile update done');
         this.alertMsgService.setMsg('Profile data has been updated..');
         this.alertMsgService.afficherDisplayAlertMsg();
+        this.loadingService.cacherDisplayLoading();
+        return true;
+      }
+      else{
+        this.loadingService.cacherDisplayLoading();
+        return false;
       }
     } catch (error) {
       this.alertMsgService.setTitle('Profile Update Error');
       this.alertMsgService.setMsg('An error occurred while updating profile data.');
       this.alertMsgService.afficherDisplayAlertMsg();
+      this.loadingService.cacherDisplayLoading();
+      return false;
     }
-    this.loadingService.cacherDisplayLoading();
   }
 
   async changePassword(currentPassword: any, newPassword: any){
