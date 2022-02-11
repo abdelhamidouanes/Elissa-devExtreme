@@ -16,6 +16,7 @@ export class ProductsComponentsVersionsComponent implements OnInit {
 
   seeDetailSubject: Subject<any> = new Subject<any>();
 
+  keyexpr =['ID_Version', 'Version', 'patch', 'IdPQ'];
 
   constructor(private productsComponentsVersionsService: ProductsComponentsVersionsService) { 
     this.products = [];

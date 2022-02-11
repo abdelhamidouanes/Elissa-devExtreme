@@ -18,6 +18,7 @@ export class TestCaseRunComponent implements OnInit , OnDestroy{
   dateBoxValue : any= new Date (this.currentDate.getFullYear() -1, this.currentDate.getMonth(), 1 ) ;
   dateApi : any ;
   
+  
   constructor(private testCaseRunService: TestCaseRunService) {
     this.testCaseRun = [];
     this.testCaseRunSubscription = new Subscription();
@@ -48,7 +49,5 @@ export class TestCaseRunComponent implements OnInit , OnDestroy{
 
     await this.testCaseRunService.getTestCaseRun(this.dateApi);
   } 
-  
- 
   
 }

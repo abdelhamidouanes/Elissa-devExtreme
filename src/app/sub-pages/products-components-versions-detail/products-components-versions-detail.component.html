@@ -1,12 +1,12 @@
 <dx-data-grid
-  [dataSource]="components.get(idProd).products"
+  [dataSource]="components.get(parentData.ID_Product+parentData.Version+parentData.patch).products"
   [showBorders]="true"
   [columnAutoWidth]="true"
-  *ngIf="components.get(idProd) != null"
+  *ngIf="components.get(parentData.ID_Product+parentData.Version+parentData.patch) != null"
   [columnHidingEnabled]="true"
-  [height]="325"
+  [height]="380"
 >
- 
+
   <dxo-paging [pageSize]="5"></dxo-paging>
   <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
 
@@ -14,19 +14,26 @@
 
   <dxo-header-filter [visible]="true"></dxo-header-filter>
 
-  <dxi-column dataField="ID_Product" caption="ID"></dxi-column>
+  <dxi-column dataField="IdVersion" caption="ID"></dxi-column>
   <dxi-column dataField="Name_Product" caption="Name Component"></dxi-column>
   <dxi-column dataField="Description" caption="Description"></dxi-column>
-  <dxi-column dataField="Email" caption="Mail Developper"></dxi-column>
   <dxi-column dataField="IdPQ" caption="Id PQ"></dxi-column>
   <dxi-column dataField="Status_PQ" caption="Status PQ"></dxi-column>
+  <dxi-column dataField="Version" caption="Version"></dxi-column>
+  <dxi-column dataField="patch" caption="Patch"></dxi-column>
+  <dxi-column dataField="Build_Version" caption="Build Version"></dxi-column>
   <dxi-column  caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
     <div *dxTemplate="let cell of 'cellTemplate'" class="action">
         <em class="fas fa-eye" (click)="onSeeDetailClick(cell)"></em>
     </div>                
-  </dxi-column>
+  </dxi-column>  
+  
+  <dxo-selection mode="multiple"></dxo-selection>
+
+  <dxo-export fileName="Products-components-versions-details" [enabled]="true" [allowExportSelectedData]="true"></dxo-export>
+
 
 </dx-data-grid>
 
-<app-detail-pop-up [event]="seeDetailSubject" title="Component Details"></app-detail-pop-up>
+<app-detail-pop-up [event]="seeDetailSubject" title="Component Version Details"></app-detail-pop-up>
 

@@ -4,7 +4,7 @@
         <dx-data-grid
             id="gridContainer"
             [dataSource]="products"
-            keyExpr="ID_Version"
+            [keyExpr]="keyexpr"
             [showBorders]="true"
             [columnAutoWidth]="true"
             [columnHidingEnabled]="true"
@@ -37,6 +37,10 @@
             <div *dxTemplate="let product of 'detail'">
                 <app-products-components-versions-detail [parentData]='product.data'></app-products-components-versions-detail>
             </div>
+
+            <dxo-selection mode="multiple"></dxo-selection>
+
+            <dxo-export fileName="Products-components-versions" [enabled]="true" [allowExportSelectedData]="true"></dxo-export>
 
         </dx-data-grid>    
     </div>

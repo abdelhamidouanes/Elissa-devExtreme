@@ -16,6 +16,7 @@ export class ProductsComponentsVersionsDetailComponent implements OnInit {
   
   seeDetailSubject: Subject<any> = new Subject<any>();
 
+
   constructor(private productsComponentsVersionsService: ProductsComponentsVersionsService) { 
     this.components = new Map<string,any>();
     this.compoenntsSubscription = new Subscription();
