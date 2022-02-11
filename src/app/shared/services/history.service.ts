@@ -55,4 +55,20 @@ export class HistoryService {
     }
     this.loadingService.cacherDisplayLoading();
   }
+
+  async getHistoryLogs(): Promise<void> {
+    this.loadingService.afficherDisplayLoading();
+    try {
+      if(await this.authService.verifyApiKey()){
+        this.history = [];
+        this.emithistory();
+      }
+    } catch (error) {
+      this.alertMsgService.setTitle('Connection error.');
+      this.alertMsgService.setMsg('An error occurred while loading data.');
+      this.alertMsgService.afficherDisplayAlertMsg();
+    }
+    this.loadingService.cacherDisplayLoading();
+  }
+
 }

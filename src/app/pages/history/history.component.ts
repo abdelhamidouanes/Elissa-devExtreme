@@ -33,6 +33,8 @@ export class HistoryComponent implements OnInit, OnDestroy {
         await this.historyservice.getHistoryElissa();
     } else if (this.typeHistory == "Projector") {
         await this.historyservice.getHistoryProjector();
+    } else if( this.typeHistory == "Logs") {
+        await this.historyservice.getHistoryLogs();
     }
 
 

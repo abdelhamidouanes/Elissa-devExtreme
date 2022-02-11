@@ -139,7 +139,7 @@ const routes: Routes = [
   {
     path: 'historyLogs',
     component: HistoryComponent,
-    data: {type: 'logs'},
+    data: {type: 'Logs'},
     canActivate: [ AuthGuardService ]
   },
   {
