@@ -34,6 +34,10 @@
         <dxi-column dataField="Login" caption="Login"></dxi-column>
         <dxi-column dataField="Created_by" caption="Created by"></dxi-column>
 
+        <dxo-selection mode="multiple"></dxo-selection>
+
+        <dxo-export [fileName]="'History '+typeHistory" [enabled]="true" [allowExportSelectedData]="true"></dxo-export>
+
         </dx-data-grid>
     </div>
 </div>

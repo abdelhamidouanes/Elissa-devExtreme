@@ -55,6 +55,11 @@
                 <em *ngIf="cell.data.Status == 'Open'" class="fas fa-trash actionDelete"></em>
             </div>              
         </dxi-column>
+
+        <dxo-selection mode="multiple"></dxo-selection>
+
+        <dxo-export fileName="Events" [enabled]="true" [allowExportSelectedData]="true"></dxo-export>
+
         </dx-data-grid>
     </div>
 </div>
