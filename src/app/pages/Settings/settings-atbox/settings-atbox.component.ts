@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { SettingsAtboxService } from 'src/app/shared/services/settings-atbox.service';
 
 @Component({
@@ -11,6 +11,9 @@ export class SettingsAtboxComponent implements OnInit {
 
   settingsAtbox: any[];
   settingsAtboxSubscription: Subscription;
+
+  seeDetailSubject: Subject<any> = new Subject<any>();
+
 
   constructor(private settingsAtboxService: SettingsAtboxService) {
     this.settingsAtbox = [];
@@ -29,6 +32,10 @@ export class SettingsAtboxComponent implements OnInit {
     });
     this.settingsAtboxService.emitSettingsAtbox();
 
+  }
+
+  onSeeDetailClick(cell: any): void {
+    this.seeDetailSubject.next({'page': 'atbox', 'id': cell.data.ID_AT_Box});
   }
 
 }

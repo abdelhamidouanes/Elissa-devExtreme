@@ -1,0 +1,24 @@
+.actionView{
+    display: inline;
+    justify-content: center;
+    align-items: center;
+    color: var(--theme-color);
+    cursor: pointer;
+}
+.actionEdit{
+    display: inline;
+    justify-content: center;
+    align-items: center;
+    color: rgb(33, 78, 78);
+    cursor: pointer;
+}
+.actionDelete{
+    display: inline;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    cursor: pointer;
+}
+.action em{
+    margin: 0px 3px;
+}

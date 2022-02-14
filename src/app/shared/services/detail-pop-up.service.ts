@@ -95,6 +95,11 @@ export class DetailPopUpService {
             this.emitDetails();
             break; 
           }
+          case 'atbox': {
+            this.details = await this.httpClient.get<any>(this.apiUrl+'atbox/read_single.php?ID='+id).toPromise();
+            this.emitDetails();
+            break; 
+          }
         }
       }
     } catch (error) {
