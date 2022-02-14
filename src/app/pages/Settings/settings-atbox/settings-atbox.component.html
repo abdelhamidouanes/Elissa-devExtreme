@@ -1,6 +1,37 @@
 <h2 class="content-block">AtBox</h2>
 <div class="content-block">
     <div class="dx-card responsive-paddings">
-        <p>test</p>
+        <dx-data-grid
+  id="gridContainer"
+  [dataSource]="settingsAtbox"
+  keyExpr="ID_AT_Box"
+  [showBorders]="true"
+  [columnAutoWidth]="true"
+[columnHidingEnabled]="true"        
+  >
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+  <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+
+
+  <dxi-column dataField="ID_AT_Box" caption="ID"></dxi-column>
+  <dxi-column dataField="Operating_System" caption="Operating System"></dxi-column>
+  <dxi-column dataField="Host_Machine" caption="Host Machine"></dxi-column>
+  <dxi-column dataField="Created_by" caption="Created By"></dxi-column>
+  <dxi-column dataField="Created_date" caption="Created Date"></dxi-column>
+  <dxi-column  caption="Action" cellTemplate="cellTemplate" [fixed]="true" fixedPosition="right">
+    <div *dxTemplate="let cell of 'cellTemplate'" class="action">
+        <em class="fas fa-eye actionView"></em>
+        <em class="fas fa-edit actionEdit"></em>
+        <em class="fas fa-trash actionDelete"></em>
+    </div>                
+</dxi-column>
+
+</dx-data-grid>
     </div>
 </div>

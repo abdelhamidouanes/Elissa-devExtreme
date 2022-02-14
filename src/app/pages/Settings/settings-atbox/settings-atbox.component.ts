@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { SettingsAtboxService } from 'src/app/shared/services/settings-atbox.service';
 
 @Component({
   selector: 'app-settings-atbox',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsAtboxComponent implements OnInit {
 
-  constructor() { }
+  settingsAtbox: any[];
+  settingsAtboxSubscription: Subscription;
 
-  ngOnInit(): void {
+  constructor(private settingsAtboxService: SettingsAtboxService) {
+    this.settingsAtbox = [];
+    this.settingsAtboxSubscription = new Subscription();
+  }
+
+  ngOnDestroy(): void {
+    this.settingsAtboxSubscription.unsubscribe();
+  }
+
+  async ngOnInit(): Promise<void> {
+
+    await this.settingsAtboxService.getAllsettingsAtbox();
+    this.settingsAtboxSubscription = this.settingsAtboxService.settingsAtboxSubject.subscribe(data => {
+      this.settingsAtbox = data.atboxs;
+    });
+    this.settingsAtboxService.emitSettingsAtbox();
+
   }
 
 }
