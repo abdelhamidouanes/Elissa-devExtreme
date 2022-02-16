@@ -31,7 +31,7 @@ import { SettingsUsersComponent } from './pages/settings/settings-users/settings
 import { SettingsAtboxComponent } from './pages/settings/settings-atbox/settings-atbox.component';
 import { DetailPopUpComponent } from './shared/components/detail-pop-up/detail-pop-up.component';
 import { ProductsComponentsVersionsDetailComponent } from './sub-pages/products-components-versions-detail/products-components-versions-detail.component';
-import { DxButtonModule, DxCalendarModule, DxChartModule, DxDataGridModule, DxFormModule, DxLoadPanelModule, DxPopupModule, DxSelectBoxModule, DxTextBoxModule, DxValidationSummaryModule, DxValidatorModule } from 'devextreme-angular';
+import { DxButtonModule, DxCalendarModule, DxChartModule, DxDataGridModule, DxFormModule, DxLoadPanelModule, DxPopupModule, DxSelectBoxModule, DxTextBoxModule, DxToastModule, DxValidationSummaryModule, DxValidatorModule } from 'devextreme-angular';
 import { TestCaseRunDetailsComponent } from './sub-pages/test-case-run-details/test-case-run-details.component';
 import { TestCaseRunSousDetailsComponent } from './sub-pages/test-case-run-sous-details/test-case-run-sous-details.component';
 import { EditPopUpComponent } from './sub-pages/edit-pop-up/edit-pop-up.component';
@@ -108,7 +108,8 @@ import { ChangepasswordComponent } from './pages/settings/changepassword/changep
     DxSelectBoxModule,
     DxListModule,
     DxDateBoxModule,
-    DxCalendarModule 
+    DxCalendarModule,
+    DxToastModule
   ],
   providers: [AuthService, ScreenService, AppInfoService, CookieService],
   bootstrap: [AppComponent]

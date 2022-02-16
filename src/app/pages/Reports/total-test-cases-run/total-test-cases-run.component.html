@@ -1,6 +1,60 @@
 <h2 class="content-block">Total Test Cases Run</h2>
 <div class="content-block">
     <div class="dx-card responsive-paddings">
-        <p>test</p>
+        <dx-form id="form" [colCount]="4">
+            <dxi-item>
+                <dx-select-box #selectBoxProduct [items]="products" [value]="products[0]" displayExpr="Name_Product"
+                    (onValueChanged)="onProductChanged($event)"></dx-select-box>
+                <dxo-label text="Product"></dxo-label>
+
+            </dxi-item>
+            <dxi-item>
+                <dx-select-box [items]="versions" displayExpr="Version" valueExpr="Value"
+                    [disabled]="selectBoxVersion" (onValueChanged)="onVersionChanged($event)"></dx-select-box>
+                <dxo-label text="Version"></dxo-label>
+
+            </dxi-item>
+
+            <dxi-item>
+                <dx-select-box [items]="sessions" displayExpr="Name_Session" valueExpr="ID_Session"
+                [disabled]="selectBoxSession" (onValueChanged)="onSessionChanged($event)"></dx-select-box>
+            <dxo-label text="Session"></dxo-label>
+
+     
+
+            </dxi-item>
+            <dxi-item>
+                <dx-date-box #selectedStartDate pickerType="rollers" displayFormat=" MMMM yyyy"
+                    [(value)]="startDateInput" (onValueChanged)="onValueChanged($event)"></dx-date-box>
+                <dxo-label text="Start Date"></dxo-label>
+            </dxi-item>
+            <dxi-item>
+                <dx-date-box #selectedEndDate pickerType="rollers" displayFormat=" MMMM yyyy" [(value)]="endDateInput"
+                    (onValueChanged)="onValueChanged($event)"></dx-date-box>
+                <dxo-label text="End Date"></dxo-label>
+            </dxi-item>
+        </dx-form>
     </div>
+    <dx-chart *ngIf="selectBoxProduct.value!=null" id="chart"
+        title="Total Test Cases Run of {{selectBoxProduct.value.Name_Product}} between {{startDateInput | date:'MM-yyyy'}} and {{endDateInput | date:'MM-yyyy'}}"
+        [dataSource]="TestRunStats">
+
+        <dxi-series valueField="number_success" name="Success"></dxi-series>
+        <dxi-series valueField="number_fail" name="Fail"></dxi-series>
+        <dxi-series valueField="number_error" name="Error"></dxi-series>
+        <dxi-series valueField="number_blocked" name="Blocked"></dxi-series>
+        <dxi-value-axis position="left">
+            <dxo-title></dxo-title>
+        </dxi-value-axis>
+        <dxo-common-series-settings argumentField="years" type="stackedBar">
+        </dxo-common-series-settings>
+        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="top">
+        </dxo-legend>
+        <dxo-export [enabled]="true"></dxo-export>
+        <dxo-tooltip [enabled]="true" location="edge" [customizeTooltip]="customizeTooltip">
+        </dxo-tooltip>
+    </dx-chart>
+    
+    <dx-toast [(visible)]="isVisibleToast" [type]="typeToast" [message]="messageToast">
+    </dx-toast>
 </div>
