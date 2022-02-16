@@ -1,6 +1,28 @@
 <h2 class="content-block">Test Cases Runtime Evolution</h2>
 <div class="content-block">
     <div class="dx-card responsive-paddings">
-        <p>test</p>
+        <div id="chart-demo">
+            <dx-chart
+              palette="violet"
+              [dataSource]="data"
+            >
+              <dxi-series valueField="Duration" name="Test Cases Runtime Evolution"></dxi-series>
+                
+                <dxo-common-series-settings
+                    #seriesSettings
+                    argumentField="dates"
+                    type="spline"
+                >
+                </dxo-common-series-settings>
+
+                <dxo-zoom-and-pan
+                    argumentAxis="both"
+                    valueAxis="none"> <!-- or "zoom" | "pan" | "none" -->
+                </dxo-zoom-and-pan>
+
+              <dxo-export [enabled]="true"></dxo-export>
+              <dxo-tooltip [enabled]="true"></dxo-tooltip>
+            </dx-chart>
+        </div>
     </div>
 </div>
