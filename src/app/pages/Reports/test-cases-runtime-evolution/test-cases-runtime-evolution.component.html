@@ -1,6 +1,41 @@
 <h2 class="content-block">Test Cases Runtime Evolution</h2>
 <div class="content-block">
     <div class="dx-card responsive-paddings">
+        <dx-form id="form"  [colCount]="4">
+            <dxi-item>
+                <dx-select-box
+                    #selectBoxProduct
+                    [items]="products"
+                    [value]="idProduct"
+                    displayExpr="Name_Product"
+                    valueExpr="ID_Product"
+                    (onValueChanged)="onProductChanged($event)"
+                ></dx-select-box>
+                <dxo-label  text="Product"></dxo-label>
+            </dxi-item>
+            <dxi-item>
+                <dx-select-box
+                    [items]="versions"
+                    [value]="idVersion"
+                    displayExpr="VersionName"
+                    valueExpr="Version"
+                    [disabled]="selectBoxVersion"
+                    (onValueChanged)="onVersionChanged($event)"
+                ></dx-select-box>
+                <dxo-label text="Version"></dxo-label>
+            </dxi-item>
+            <dxi-item>
+                <dx-select-box
+                    [items]="tests"
+                    [value]="idTest"
+                    displayExpr="Test_Name"
+                    valueExpr="ID_Test"
+                    [disabled]="selectBoxTest"
+                    (onValueChanged)="onTestChanged($event)"
+                ></dx-select-box>
+                <dxo-label text="Test"></dxo-label>
+            </dxi-item>
+        </dx-form>
         <div id="chart-demo">
             <dx-chart
               palette="violet"

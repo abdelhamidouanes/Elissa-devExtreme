@@ -120,7 +120,7 @@ export class TotalBugsComponent implements OnInit, OnDestroy {
     this.versionsSubscription = this.VersionService.versionsSubject.subscribe(data => {
       this.versions = data;
     });
-    this.productService.emitProducts();
+    this.VersionService.emitVersions();
   }
   
   customizeTooltip(arg: any) {
