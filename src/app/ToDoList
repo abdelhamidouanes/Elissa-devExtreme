@@ -1,0 +1,8 @@
+***Organisation de l'affichage dans detailPopUp, priorité des key/value.
+***Affichage du titre dans detailPopUp
+***Enlevé le filtre pour les colonne ID/ name testsession/duration/ launch time/ name session
+***Ajouter dans les datagrid les options colone organisation, select colonne, regroupement
+***popup X button to close it
+***Ne pas afficher les testsession ayant un status completed, closed, failed
+***Titre modification : Test Cases au lieu de Testlist dans le popup test session details 
+***Test case run accordion ajout de margin et reduire taille police

@@ -1,7 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ProductsComponentsVersionsService } from 'src/app/shared/services/products-components-versions.service';
-import { ProductsComponentsService } from 'src/app/shared/services/products-components.service';
 import { ReportsTestCasesRuntimeEvolutionService } from 'src/app/shared/services/reports-test-cases-runtime-evolution.service';
 
 @Component({
